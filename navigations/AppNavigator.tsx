@@ -1,0 +1,45 @@
+import {NavigationContainer} from '@react-navigation/native';
+import React from 'react';
+import {AppDrawerParamList} from '../src/types/NavigationTypes';
+import {createDrawerNavigator} from '@react-navigation/drawer';
+import 'react-native-gesture-handler';
+import HomeNavigator from './HomeNavigator';
+
+// navigators
+import MenuNavigator from './MenuNavigator';
+
+const Drawer = createDrawerNavigator<AppDrawerParamList>();
+
+export default function AppNavigator() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator>
+        <Drawer.Screen
+          name="HomePage"
+          options={{drawerLabel: 'Home'}}
+          component={HomeNavigator}
+        />
+        {/* <Drawer.Screen
+          name="Address"
+          options={{drawerLabel: 'Address'}}
+          component={AddressNavigator}
+        />
+        <Drawer.Screen
+          name="Login"
+          options={{drawerLabel: 'Login'}}
+          component={LoginNavigator}
+        />
+        <Drawer.Screen
+          name="ProductList"
+          options={{drawerLabel: 'Products'}}
+          component={ProductListNavigator}
+        /> */}
+        <Drawer.Screen
+          name="Categories"
+          options={{drawerLabel: 'Categories'}}
+          component={MenuNavigator}
+        />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
