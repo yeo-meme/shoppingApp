@@ -1,6 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-import {COLORS, FONTS} from '../constants';
+
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
   HomeStackParamList,
@@ -15,6 +16,7 @@ import {Text, View} from 'react-native';
 // screens
 import Category from '../screens/Categories';
 import Home from '../screens/home';
+import Cart from '../screens/Cart';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -35,28 +37,122 @@ const Second = () => {
   );
 };
 
+// Bottom Sheet Menu
 function HomeTabs() {
   return (
     <Tab.Navigator initialRouteName="Home">
-      <Tab.Screen name="Home" component={Home} />
-      <Tab.Screen name="Second" component={Second} />
+      {/* bottom navi */}
+
+      {/* 1: home */}
+      <Tab.Screen
+        name="Home"
+        component={Home}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+        }}
+      />
+
+      {/* 2: category */}
+      <Tab.Screen
+        name="category"
+        component={Category}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="format-list-bulleted-square"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      {/* 3: Brand */}
+      <Tab.Screen
+        name="Brand"
+        component={Home}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+          },
+        }}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="cards-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+
+      {/* 4: Account */}
+      <Tab.Screen
+        name="Account"
+        component={Home}
+        listeners={{
+          tabPress: e => {
+            e.preventDefault();
+          },
+        }}
+        options={{
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="account-circle-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+
+      {/* 5: MyBag */}
+      <Tab.Screen
+        name="MyBag"
+        component={Cart}
+        options={{
+          title: 'My Bag',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons
+              name="shopping-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 }
 
+// Drawer Sheet Navi
 export default function HomeNavigator() {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
   return (
     <Stack.Navigator initialRouteName="Home">
-      <Stack.Screen name="Home" component={HomeTabs} />
-      {/* 
-          <Stack.Screen
-          name="Category"
-          component={Category} />
+      <Stack.Screen
+        name="Home"
+        component={HomeTabs}
+        options={{headerShown: false, animationEnabled: false}}
+      />
 
-          <Stack.Screen
-          name="ProductList"
-          component={ProductList} /> */}
+      <Stack.Screen name="Category" component={Category} />
+      {/* <Stack.Screen name="ProductList" component={ProductList} />
+      <Stack.Screen name="Product" component={Product} /> */}
+      <Stack.Screen name="Cart" component={Cart} />
+
+
+
+
+      {/* <Stack.Screen 
+      name="Category" 
+      component={Category}
+      options={{headerShown: false, animationEnabled: false}}
+       />
+
+      <Stack.Screen name="ProductList" component={ProductList} /> */}
     </Stack.Navigator>
   );
 }
