@@ -11,7 +11,8 @@ const Stack = createStackNavigator<AddressStackParamList>()
 export default function AddressNavigator() {
     const navigation = useNavigation<StackNavigationProp<AddressStackParamList>>()
     return (
-        <Stack.Navigator initialRouteName={'Address'}>
+        <Stack.Navigator initialRouteName={'Address'}
+        screenOptions={{ headerShown: false }}>
             <Stack.Screen
                 name="Address"
                 component={Address}

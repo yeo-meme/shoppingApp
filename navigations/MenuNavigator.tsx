@@ -21,7 +21,9 @@ export default function MenuNavigator() {
   const navigation =
     useNavigation<StackNavigationProp<MenuAndProductListStackParamList>>();
   return (
-    <Stack.Navigator initialRouteName={'Category'}>
+    <Stack.Navigator initialRouteName={'Category'}
+    screenOptions={{ headerShown: false }}
+    >
       <Stack.Screen name="Category" component={Category}
         options={{
           title: 'Categories'

@@ -40,7 +40,9 @@ const Second = () => {
 // Bottom Sheet Menu
 function HomeTabs() {
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator initialRouteName="Home"
+    screenOptions={{ headerShown: false }}
+>
       {/* bottom navi */}
 
       {/* 1: home */}
@@ -48,10 +50,10 @@ function HomeTabs() {
         name="Home"
         component={Home}
         options={{
+          tabBarLabel: '홈',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
+          ),     }}
       />
 
       {/* 2: category */}
@@ -59,6 +61,7 @@ function HomeTabs() {
         name="category"
         component={Category}
         options={{
+          tabBarLabel: '이벤트',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="format-list-bulleted-square"
@@ -78,6 +81,7 @@ function HomeTabs() {
           },
         }}
         options={{
+          tabBarLabel: '내취향',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="cards-outline"
@@ -98,6 +102,7 @@ function HomeTabs() {
           },
         }}
         options={{
+          tabBarLabel: '마이페이지',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="account-circle-outline"
@@ -113,7 +118,7 @@ function HomeTabs() {
         name="MyBag"
         component={Cart}
         options={{
-          title: 'My Bag',
+          tabBarLabel: '장바구니',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="shopping-outline"
@@ -131,11 +136,11 @@ function HomeTabs() {
 export default function HomeNavigator() {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
   return (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Home"
+    screenOptions={{ headerShown: false }}>
       <Stack.Screen
         name="Home"
         component={HomeTabs}
-        options={{headerShown: false, animationEnabled: false}}
       />
 
       <Stack.Screen name="Category" component={Category} />

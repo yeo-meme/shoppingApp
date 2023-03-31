@@ -1,4 +1,4 @@
-import {NavigationContainer} from '@react-navigation/native';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 import React from 'react';
 import {AppDrawerParamList} from '../src/types/NavigationTypes';
 import {createDrawerNavigator} from '@react-navigation/drawer';
@@ -14,7 +14,8 @@ const Drawer = createDrawerNavigator<AppDrawerParamList>();
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator 
+      >
         <Drawer.Screen
           name="HomePage"
           options={{drawerLabel: 'Home'}}
@@ -38,7 +39,7 @@ export default function AppNavigator() {
         // /> */}
         <Drawer.Screen
           name="Categories"
-          options={{drawerLabel: 'Categories'}}
+          options={{drawerLabel: 'Events'}}
           component={MenuNavigator}
         />
       </Drawer.Navigator>
