@@ -35,7 +35,10 @@ const Item = ({title}: any) => (
 );
 
 const Home = () => {
+  // demy item List text
   const renderItem = ({item}: any) => <Item title={item.title} />;
+
+  // function renderTrendingShoes()
 
   return (
     <View>

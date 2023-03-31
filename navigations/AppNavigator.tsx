@@ -7,6 +7,7 @@ import HomeNavigator from './HomeNavigator';
 
 // navigators
 import MenuNavigator from './MenuNavigator';
+import AddressNavigator from './AddressNavigator';
 
 const Drawer = createDrawerNavigator<AppDrawerParamList>();
 
@@ -19,21 +20,22 @@ export default function AppNavigator() {
           options={{drawerLabel: 'Home'}}
           component={HomeNavigator}
         />
-        {/* <Drawer.Screen
+        <Drawer.Screen
           name="Address"
           options={{drawerLabel: 'Address'}}
           component={AddressNavigator}
         />
-        <Drawer.Screen
-          name="Login"
-          options={{drawerLabel: 'Login'}}
-          component={LoginNavigator}
-        />
-        <Drawer.Screen
-          name="ProductList"
-          options={{drawerLabel: 'Products'}}
-          component={ProductListNavigator}
-        /> */}
+        {/*
+        // <Drawer.Screen
+        //   name="Login"
+        //   options={{drawerLabel: 'Login'}}
+        //   component={LoginNavigator}
+        // />
+        // <Drawer.Screen
+        //   name="ProductList"
+        //   options={{drawerLabel: 'Products'}}
+        //   component={ProductListNavigator}
+        // /> */}
         <Drawer.Screen
           name="Categories"
           options={{drawerLabel: 'Categories'}}
