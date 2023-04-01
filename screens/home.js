@@ -7,6 +7,7 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
+  onPress,
   SafeAreaView,
   StatusBar,
   ImageBase,
@@ -80,6 +81,14 @@ const Item = ({data}: any) => (
   </View>
 );
 
+// ClickListener
+const ItemOnClick = (url) => (
+  console.log(url)
+  // <TouchableOpacity onPress={onPress} style={[styles.item, style]}>
+  //   <Text style={styles.title}>{item.fullName}</Text>
+  // </TouchableOpacity>
+);
+
 const Home = () => {
   // demy item List text
   const renderItem = ({item}: any) => <Item data={item} />;
@@ -139,7 +148,7 @@ const Home = () => {
             <FlatList
               horizontal
               data={data}
-              renderItem={({item}) => (
+              renderItem={({item, index}) => (
                 <Box
                   borderBottomWidth="1"
                   _dark={{
@@ -165,11 +174,13 @@ const Home = () => {
           </View>
 
           {/* 2번 리스트: 베스트 clothes */}
+        
           <View style={{height: 260, marginTop: 2}}>
             <FlatList
               horizontal
               data={data}
               renderItem={({item}) => (
+                <TouchableOpacity onPress={(onPress) => ItemOnClick(item.avatarUrl)}>
                 <Box
                   borderBottomWidth="1"
                   _dark={{
@@ -187,8 +198,12 @@ const Home = () => {
                         // item.avatarUrl
                       }}
                     />
+                   
                   </HStack>
                 </Box>
+          </TouchableOpacity>
+
+                
               )}
               keyExtractor={item => item.id}
             />
@@ -229,6 +244,7 @@ const Home = () => {
                     pr={['0', '5']}
                     py="2">
                     <HStack space={[2, 3]} justifyContent="space-between">
+                   
                       <Image
                         size="400px"
                         source={{
