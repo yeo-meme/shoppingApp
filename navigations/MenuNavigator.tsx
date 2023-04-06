@@ -14,6 +14,10 @@ import Category from '../screens/Categories';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import ProductList from '../screens/ProductList';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SIZES } from '../constants/theme';
+import icons from '../constants/icons';
+import { Image } from 'native-base';
 
 const Stack = createStackNavigator<MenuAndProductListStackParamList>();
 
@@ -23,13 +27,33 @@ export default function MenuNavigator() {
   return (
 
     <Stack.Navigator initialRouteName={'Category'}
-    screenOptions={{ headerShown: false }}
+    screenOptions={{ headerShown: true }}
     >
 
-      <Stack.Screen name="Category" component={Category}
+      <Stack.Screen 
+      name="Category" 
+      component={Category}
+
         options={{
-          title: 'Categories'
-        }} />
+          title: 'Categories',
+          headerLeft: ({onPress}) => (
+            <TouchableOpacity
+              style={{marginLeft: SIZES.padding}}
+              onPress={() => {
+                navigation.goBack();
+              }}>
+              <Image
+                source={icons.arrow_back}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                }}
+              />
+            </TouchableOpacity>
+          ),
+        }}
+         />
          {/* <Stack.Screen name="Product" component={Product} /> */}
             <Stack.Screen name="Cart" component={Cart} />
             {/* <Stack.Screen name="Detail" component={Detail} /> */}

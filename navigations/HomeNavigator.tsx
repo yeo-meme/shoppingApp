@@ -1,5 +1,5 @@
 import React from 'react';
-import {useNavigation} from '@react-navigation/native';
+import {DrawerActions, useNavigation} from '@react-navigation/native';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -11,7 +11,7 @@ import {
   createStackNavigator,
   StackNavigationProp,
 } from '@react-navigation/stack';
-import {Text, View} from 'react-native';
+import {Image, Text, View} from 'react-native';
 
 // screens
 import Category from '../screens/Categories';
@@ -19,6 +19,9 @@ import Home from '../screens/home';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import icons from '../constants/icons';
+import { SIZES } from '../constants/theme';
+
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -144,6 +147,22 @@ export default function HomeNavigator() {
       <Stack.Screen
         name="Home"
         component={HomeTabs}
+        options={{
+          headerLeft: ({ onPress }) => (
+            <TouchableOpacity
+            style={{ marginLeft: SIZES.padding }}
+                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+                <Image
+                    source={icons.menu}
+                    resizeMode="contain"
+                    style={{
+                        width: 25,
+                        height: 25,
+                    }}
+                />
+            </TouchableOpacity>
+        ),
+        }}
         />
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="Cart" component={Cart} />
