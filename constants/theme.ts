@@ -1,6 +1,18 @@
 import { Dimensions, TextStyle } from 'react-native';
 const { width, height } = Dimensions.get('window');
 
+
+export const COLORS = {
+    // colors
+    black: '#1E1F20',
+    white: '#FFFFFF',
+    lightGray: '#ABAFB8',
+    gray: '#BEC1D2',
+    light1: '#f2f2f2',
+    light2: '#8c8c8c',
+    cat_title_color: '#212121',
+  };
+
 export const SIZES: { [key: string]: number} = {
 // global sizes
 base: 8,
@@ -26,6 +38,6 @@ width,
 height,
 };
 
-const appTheme = { SIZES };
+const appTheme = { SIZES, COLORS };
 
 export default appTheme;
