@@ -24,7 +24,7 @@ export default function AddressNavigator() {
         name="Address"
         component={Address}
         options={{
-          title: 'Address',
+          title: '회원정보입력',
           headerStyle: {
             //backgroundColor: '#f4511e',
           },

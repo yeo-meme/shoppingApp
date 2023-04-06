@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -20,6 +20,14 @@ const ProductList: React.FC = () => {
   const navigation = useNavigation();
   const [product_list, setProductList] = useState<ProductType[]>(ProductsDummyData);
   console.log("내취향");
+
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: `브랜드별 카테고리`,
+    });
+  }, [navigation]);
+
   function renderProductList(item: ProductType, index: number) {
     return (
       <View

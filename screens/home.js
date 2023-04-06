@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import React, {useContext, useState} from 'react';
+import React, {useContext, useState,useLayoutEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -108,8 +108,6 @@ const Home = ({
   navigation,
 }: { navigation:StackNavigationProp<HomeStackParamList>
 }) => {
-  
-
   console.log("home.log")
 
   const handleItemPress = (itemId) => {

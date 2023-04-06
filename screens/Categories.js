@@ -1,5 +1,5 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {userEffect} from 'react';
+import React, {useEffect, useLayoutEffect} from 'react';
 import { Image } from 'native-base';
 import {
   StyleSheet,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
 } from 'react-native'
 import { Input,Heading,HStack,Avatar,VStack,Spacer, Box,Button, Center, NativeBaseProvider } from "native-base";
+import { useFocusEffect } from '@react-navigation/native';
 const DATA = [
   {
     id: 1,
@@ -65,7 +66,14 @@ const data = [{
 
 
 
-const Category = () => {
+const Category = ({navigation}) => {
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: `이벤트요정`,
+    });
+  }, [navigation]);
+
 
   const renderItem = ({item}: any) => <Item title={item.title} />;
 

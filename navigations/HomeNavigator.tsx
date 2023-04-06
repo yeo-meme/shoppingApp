@@ -12,6 +12,9 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import {Image, Text, View} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { SIZES } from '../constants/theme';
+import icons from '../constants/icons';
 
 // screens
 import Category from '../screens/Categories';
@@ -19,9 +22,8 @@ import Home from '../screens/home';
 import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import icons from '../constants/icons';
-import { SIZES } from '../constants/theme';
+import MyPage from '../screens/Mypage'
+
 
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
@@ -96,12 +98,7 @@ function HomeTabs() {
       {/* 4: Account */}
       <Tab.Screen
         name="Account"
-        component={Home}
-        listeners={{
-          tabPress: e => {
-            e.preventDefault();
-          },
-        }}
+        component={MyPage}
         options={{
           tabBarLabel: '마이페이지',
           tabBarIcon: ({color, size}) => (
@@ -144,6 +141,7 @@ export default function HomeNavigator() {
         name="Home"
         component={HomeTabs}
         options={{
+          title:'무신사',
           headerLeft: ({ onPress }) => (
             <TouchableOpacity
             style={{ marginLeft: SIZES.padding }}
@@ -160,26 +158,12 @@ export default function HomeNavigator() {
         ),
         }}
         />
-      <Stack.Screen name="Category" component={Category} />
+      <Stack.Screen 
+      name="Category" 
+      component={Category}
+      />
       <Stack.Screen name="Cart" component={Cart} />
-      <Stack.Screen
-       name="Detail" 
-       component={Detail} 
-      //  options={({ navigation }) => ({
-      //   headerShown: false,
-      //   headerTransparent:true,
-      //   title: 'Detail',
-      //   headerLeft: () =>(
-      //     <TouchableOpacity
-      //     style={{ marginLeft:}}
-      //     onPress={() => {
-      //       navigation.goBack();
-      //     }}>
-      //       <Text>Back</Text>
-      //     </TouchableOpacity>
-      //   )
-      //  })}
-       />
+      <Stack.Screen name="Detail" component={Detail} />
 
     </Stack.Navigator>
   );
