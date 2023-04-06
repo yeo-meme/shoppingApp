@@ -16,6 +16,7 @@ import {Image, Text, View} from 'react-native';
 // screens
 import Category from '../screens/Categories';
 import Home from '../screens/home';
+import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -79,12 +80,7 @@ function HomeTabs() {
       {/* 3: Brand */}
       <Tab.Screen
         name="Brand"
-        component={Home}
-        listeners={{
-          tabPress: e => {
-            e.preventDefault();
-          },
-        }}
+        component={ProductList}
         options={{
           tabBarLabel: '내취향',
           tabBarIcon: ({color, size}) => (

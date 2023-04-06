@@ -4,11 +4,13 @@ import {AppDrawerParamList} from '../src/types/NavigationTypes';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import 'react-native-gesture-handler';
 import HomeNavigator from './HomeNavigator';
+import { TouchableOpacity } from 'react-native';
 
 // navigators
 import MenuNavigator from './MenuNavigator';
 import AddressNavigator from './AddressNavigator';
-import { TouchableOpacity } from 'react-native';
+import ProductListNavigator from './ProductListnavigator';
+
 
 const Drawer = createDrawerNavigator<AppDrawerParamList>();
 
@@ -28,17 +30,16 @@ export default function AppNavigator() {
           options={{drawerLabel: 'Address'}}
           component={AddressNavigator}
         />
-        {/*
-        // <Drawer.Screen
-        //   name="Login"
-        //   options={{drawerLabel: 'Login'}}
-        //   component={LoginNavigator}
-        // />
-        // <Drawer.Screen
-        //   name="ProductList"
-        //   options={{drawerLabel: 'Products'}}
-        //   component={ProductListNavigator}
-        // /> */}
+         {/* <Drawer.Screen
+         name="Login"
+           options={{drawerLabel: 'Login'}}
+           component={LoginNavigator}
+         /> */}
+         <Drawer.Screen
+           name="ProductList"
+           options={{drawerLabel: 'Products'}}
+           component={ProductListNavigator}
+         />
         <Drawer.Screen
           name="Categories"
           options={{drawerLabel: 'Events'}}

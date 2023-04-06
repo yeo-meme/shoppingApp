@@ -10,6 +10,10 @@ import {
   MenuAndProductListStackParamList,
 } from '../src/types/NavigationTypes';
 
+//screens
+import ProductList from '../screens/ProductList';
+import Cart from '../screens/Cart';
+
 const Stack = createStackNavigator<MenuAndProductListStackParamList>();
 
 export default function ProductlistNavigator() {
@@ -18,6 +22,7 @@ export default function ProductlistNavigator() {
   return (
     <Stack.Navigator initialRouteName={'ProductList'}>
       <Stack.Screen name="ProductList" component={ProductList} />
+      <Stack.Screen name="Cart" component={Cart} />
     </Stack.Navigator>
   );
 }
