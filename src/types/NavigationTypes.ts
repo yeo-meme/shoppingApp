@@ -26,6 +26,7 @@ export type HomeStackParamList = {
   Product: undefined;
   ProductList: undefined;
   Splashscreen: undefined;
+  Detail: undefined;
 };
 
 export type LoginStackParamList = {
@@ -38,4 +39,5 @@ export type MenuAndProductListStackParamList = {
   Category: undefined;
   Product: undefined;
   ProductList: undefined;
+  Detail: undefined;
 };

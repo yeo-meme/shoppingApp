@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import {useNavigation} from '@react-navigation/native';
+
 import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
@@ -15,6 +15,10 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import {CloshtesContext} from '../src/context';
 import {Box, HStack, Avatar, VStack, Image} from 'native-base';
+import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { createStackNavigator,StackNavigationPro, } from '@react-navigation/stack'
+import { HomeStackParamList } from '../src/types/NavigationTypes';
+import Detail from '../screens/Detail'
 
 const DATA = [
   {
@@ -89,7 +93,33 @@ const ItemOnClick = (url) => (
   // </TouchableOpacity>
 );
 
-const Home = () => {
+
+// const Stack = createStackNavigator<HomeStackParamList>();
+
+const ViewStackScreen = () => {
+  return(
+    console.log("stack screen")
+  )
+}
+
+
+
+const Home = ({
+  navigation,
+}: { navigation:StackNavigationProp<HomeStackParamList>
+}) => {
+  
+
+  console.log("home.log")
+
+  const handleItemPress = (itemId) => {
+    navigation.navigate('Detail',{id: itemId, headerShown:true});
+    console.log("home.touch.log")
+  }
+  
+
+  
+
   // demy item List text
   const renderItem = ({item}: any) => <Item data={item} />;
 
@@ -180,7 +210,8 @@ const Home = () => {
               horizontal
               data={data}
               renderItem={({item}) => (
-                <TouchableOpacity onPress={(onPress) => ItemOnClick(item.avatarUrl)}>
+                <TouchableOpacity onPress={() => handleItemPress(item.id)}>
+                {/* <TouchableOpacity onPress={(onPress) => ItemOnClick(item.avatarUrl)}> */}
                 <Box
                   borderBottomWidth="1"
                   _dark={{

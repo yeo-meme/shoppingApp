@@ -8,17 +8,19 @@ import HomeNavigator from './HomeNavigator';
 // navigators
 import MenuNavigator from './MenuNavigator';
 import AddressNavigator from './AddressNavigator';
+import { TouchableOpacity } from 'react-native';
 
 const Drawer = createDrawerNavigator<AppDrawerParamList>();
 
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Drawer.Navigator 
-      >
+      <Drawer.Navigator screenOptions={{ headerShown: false }}>
         <Drawer.Screen
           name="HomePage"
-          options={{drawerLabel: 'Home'}}
+          options={{
+            drawerLabel: 'Home',
+          }}
           component={HomeNavigator}
         />
         <Drawer.Screen

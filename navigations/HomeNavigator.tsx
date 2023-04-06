@@ -17,6 +17,8 @@ import {Text, View} from 'react-native';
 import Category from '../screens/Categories';
 import Home from '../screens/home';
 import Cart from '../screens/Cart';
+import Detail from '../screens/Detail';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -137,27 +139,33 @@ export default function HomeNavigator() {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
   return (
     <Stack.Navigator initialRouteName="Home"
-    screenOptions={{ headerShown: false }}>
+    screenOptions={{ headerShown: true }}>
+
       <Stack.Screen
         name="Home"
         component={HomeTabs}
-      />
-
+        />
       <Stack.Screen name="Category" component={Category} />
-      {/* <Stack.Screen name="ProductList" component={ProductList} />
-      <Stack.Screen name="Product" component={Product} /> */}
       <Stack.Screen name="Cart" component={Cart} />
-
-
-
-
-      {/* <Stack.Screen 
-      name="Category" 
-      component={Category}
-      options={{headerShown: false, animationEnabled: false}}
+      <Stack.Screen
+       name="Detail" 
+       component={Detail} 
+      //  options={({ navigation }) => ({
+      //   headerShown: false,
+      //   headerTransparent:true,
+      //   title: 'Detail',
+      //   headerLeft: () =>(
+      //     <TouchableOpacity
+      //     style={{ marginLeft:}}
+      //     onPress={() => {
+      //       navigation.goBack();
+      //     }}>
+      //       <Text>Back</Text>
+      //     </TouchableOpacity>
+      //   )
+      //  })}
        />
 
-      <Stack.Screen name="ProductList" component={ProductList} /> */}
     </Stack.Navigator>
   );
 }
