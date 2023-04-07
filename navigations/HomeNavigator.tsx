@@ -1,6 +1,5 @@
 import React from 'react';
 import {DrawerActions, useNavigation} from '@react-navigation/native';
-
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -15,6 +14,7 @@ import {Image, Text, View} from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { SIZES } from '../constants/theme';
 import icons from '../constants/icons';
+import Ionicons from 'react-native-vector-icons/Ionicons'
 
 // screens
 import Category from '../screens/Categories';
@@ -23,6 +23,7 @@ import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import MyPage from '../screens/Mypage'
+import { Icon } from 'native-base';
 
 
 
@@ -71,11 +72,12 @@ function HomeTabs() {
         options={{
           tabBarLabel: '이벤트',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="format-list-bulleted-square"
-              color={color}
-              size={size}
-            />
+            <Icon as={Ionicons} name="home" size={size} color={color} />
+            // <MaterialCommunityIcons
+            //   name="format-list-bulleted-square"
+            //   color={color}
+            //   size={size}
+            // />
           ),
         }}
       />

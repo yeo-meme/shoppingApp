@@ -25,11 +25,10 @@ import {HomeStackParamList} from '../src/types/NavigationTypes';
 import Detail from '../screens/Detail';
 import {SIZES, COLORS} from '../constants/theme';
 import {ClothesContext} from '../src/context';
-import { TrendingDummyData } from '../src/data/TrendingDummyData';
-import musinsaWomen from '../src/data/musinsaWomen';
-import newData from '../src/data/newData';
-import recentData from '../src/data/RecentData'
-
+import {TrendingDummyData} from '../src/data/TrendingDummyData';
+import musinsaWomen from '../src/data/MusinsaWomen';
+import newData from '../src/data/NewData';
+import recentData from '../src/data/RecentData';
 
 const data = [
   {
@@ -78,7 +77,8 @@ const Home = () => {
   console.log('home.log');
 
   const navigation = useNavigation();
-  const {recentlyViewed, trending, trendingClothes} = useContext(ClothesContext);
+  const {recentlyViewed, trending, trendingClothes} =
+    useContext(ClothesContext);
   const [showAddToBagModal, setShowAddToBagModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
@@ -111,6 +111,7 @@ const Home = () => {
         onPress={() => {
           setSelectedItem(item);
           setShowAddToBagModal(true);
+          navigation.navigate('Detail');
         }}>
         <Text style={{color: COLORS.gray}}>{item.type}</Text>
 
@@ -189,7 +190,7 @@ const Home = () => {
         onPress={() => {
           // setSelectedItem(item)
           // setShowAddToBagModal(true)
-          navigation.navigate('Product', {
+          navigation.navigate('Detail', {
             id: item.id,
             name: item.name,
             img: item.img,
@@ -270,7 +271,7 @@ const Home = () => {
     });
   }
 
-  function dummyRender (item, index) { 
+  function twoLineListRender(item, index) {
     var trendingStyle = {};
 
     if (index == 0) {
@@ -289,7 +290,7 @@ const Home = () => {
         onPress={() => {
           // setSelectedItem(item)
           // setShowAddToBagModal(true)
-          navigation.navigate('Product', {
+          navigation.navigate('Detail', {
             id: item.id,
             name: item.name,
             img: item.img,
@@ -324,45 +325,51 @@ const Home = () => {
   }
 
   function renderRecentlyViewed(item, index) {
-    if (item.price.toString().includes('$')) { item.price = Math.round(item.price.replace('$', '')); }
-    else if (!item.price.toString().includes('₹')) { item.price = '₹' + item.price; }
+    if (item.price.toString().includes('$')) {
+      item.price = Math.round(item.price.replace('$', ''));
+    } else if (!item.price.toString().includes('₹')) {
+      item.price = '₹' + item.price;
+    }
 
     return (
-        <TouchableOpacity
-            style={{ flex: 1, flexDirection: 'row' }}
-            onPress={() => {
-                navigation.navigate('Product', {
-                    id: item.id,
-                    name: item.name,
-                    img: item.img,
-                    type: item.type,
-                    price: item.price,
-                });
+      <TouchableOpacity
+        style={{flex: 1, flexDirection: 'row'}}
+        onPress={() => {
+          navigation.navigate('Detail', {
+            id: item.id,
+            name: item.name,
+            img: item.img,
+            type: item.type,
+            price: item.price,
+          });
+        }}>
+        <View
+          style={{
+            flex: 2,
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: 4,
+          }}>
+          <Image
+            source={{uri: item.img}}
+            resizeMode="contain"
+            style={{
+              borderRadius: 10,
+              width: 110,
+              height: 120,
+              margin: 1,
             }}
-        >
-            <View style={{
-                flex: 2, alignItems: 'center', justifyContent: 'center', padding: 4
-            }}>
-                <Image
-                    source={{ uri: item.img }}
-                    resizeMode="contain"
-                    style={{
-                        borderRadius: 10,
-                        width: 110,
-                        height: 120,
-                        margin: 1,
-
-                    }}
-                />
-            </View>
-            <View style={{ flex: 3, marginLeft: SIZES.radius, justifyContent: 'center' }}>
-                <Text style={{ color: COLORS.black}}>{item.name}</Text>
-                <Text >{item.price}</Text>
-                <Text > 30% Off</Text>
-            </View>
-        </TouchableOpacity>
+          />
+        </View>
+        <View
+          style={{flex: 3, marginLeft: SIZES.radius, justifyContent: 'center'}}>
+          <Text style={{color: COLORS.black}}>{item.name}</Text>
+          <Text>{item.price}</Text>
+          <Text> 30% Off</Text>
+        </View>
+      </TouchableOpacity>
     );
-}
+  }
 
   // demy item List text
   const renderItem = ({item}: any) => <Item data={item} />;
@@ -396,73 +403,43 @@ const Home = () => {
         {/* 최상위View */}
         <View style={styles.container}>
           {/* 1번째 리스트 : 신발 */}
-          {/* <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
+          {/* <View
+            style={{height: 260, marginTop: 5, backgroundColor: COLORS.white}}>
             <FlatList
               horizontal
               data={trending}
               showsHorizontalScrollIndicator={false}
               renderItem={({item, index}) => renderTrendingShoes(item, index)}
               keyExtractor={item => item.id.toString()}
-
-              // (
-              //   <Box
-              //     borderBottomWidth="1"
-              //     _dark={{
-              //       borderColor: 'muted.50',
-              //     }}
-              //     borderColor="muted.800"
-              //     pl={['0', '4']}
-              //     pr={['0', '5']}
-              //     py="2">
-              //     <HStack space={[2, 3]} justifyContent="space-between">
-              //       <Image
-              //         size="200px"
-              //         source={{
-              //           uri: item.avatarUrl,
-              //           // item.avatarUrl
-              //         }}
-              //       />
-              //     </HStack>
-              //   </Box>
-              // )
-              // }
-              // keyExtractor={item => item.id}
             />
           </View> */}
 
-
-           <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
-            <FlatList
-              horizontal
-              data={trending}
-              showsHorizontalScrollIndicator={false}
-              renderItem={({item, index}) => renderTrendingShoes(item, index)}
-              keyExtractor={item => item.id.toString()}
-            />
-          </View>
-
-          <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
+          <View
+            style={{height: 260, marginTop: 2, backgroundColor: COLORS.white}}>
             <FlatList
               horizontal
               data={musinsaWomen}
               showsHorizontalScrollIndicator={false}
-              renderItem={({item, index}) => dummyRender(item, index)}
+              renderItem={({item, index}) => twoLineListRender(item, index)}
               keyExtractor={item => item.id.toString()}
             />
           </View>
 
           {/* 2번 리스트: 베스트 clothes */}
 
-          <View style={{height: 260, marginTop: 2, backgroundColor: COLORS.light1}}>
+          <View
+            style={{height: 260, marginTop: 2, backgroundColor: COLORS.light1}}>
             <FlatList
               horizontal
               data={recentData}
-              renderItem={({item, index}) => renderLatestClothesTrendingItems(item, index)}
+              renderItem={({item, index}) =>
+                renderLatestClothesTrendingItems(item, index)
+              }
               keyExtractor={item => item.id.toString()}
             />
           </View>
 
-{/* 3번째 */}
+          {/* 3번째 */}
           {/* <View
             style={[
               {
@@ -522,7 +499,7 @@ const Home = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
+    marginTop: 0,
   },
   item: {
     backgroundColor: '#f9c2ff',

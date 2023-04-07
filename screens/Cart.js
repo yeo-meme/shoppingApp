@@ -7,11 +7,12 @@ import {makeMutable} from 'react-native-reanimated';
 import {Text} from '@react-native-material/core';
 import {StackRouter} from '@react-navigation/native';
 import HomeNavigator from '../navigations/HomeNavigator';
-import {COLORS} from '../constants/theme';
 import images from '../constants/images';
-import icons from '../constants/icons';
+import {COLORS, SIZES, icons} from '../constants';
 
-const Cart = ({navigation}) => {
+const Cart = ({route, navigation}) => {
+  var {id, name, img, type, price} = route.params;
+
 
   useEffect(() => {
     navigation.setOptions({
@@ -42,21 +43,21 @@ const Cart = ({navigation}) => {
             }}>
             {/* 3 */}
             <View style={{flex: 2, justifyContent: 'space-evenly'}}>
-              <Text style={{paddingBottom: 10}}>상품명</Text>
-              <Text style={{paddingBottom: 10}}>가격</Text>
+              <Text style={{paddingBottom: 10}}>{name}</Text>
+              <Text style={{paddingBottom: 10}}>{price}</Text>
               <Text
                 style={{
                   paddingBottom: 10,
                   color: '#b71c1c',
                 }}>
-                (40%) Off Coupon Applicable
+                (40%) 모바일앱 주문시 할인
               </Text>
-              <Text style={{color: COLORS.black}}>Delivery By 21st July</Text>
+              <Text style={{color: COLORS.black}}>오후 6시이전 주문시 다음날 도착예정 80%</Text>
             </View>
             {/* 4 */}
             <View style={{flex: 1}}>
               <Image
-                source={images.nikeMetcon3}
+                source={{uri: img}}
                 resizeMode="contain"
                 style={{
                   width: 100,
@@ -83,6 +84,7 @@ const Cart = ({navigation}) => {
               style={{
                 flex: 3,
                 marginTop: 6,
+                marginLeft: 240,
                 flexDirection: 'row',
                 alignItems: 'center',
                 alignContent: 'center',
@@ -94,7 +96,7 @@ const Cart = ({navigation}) => {
               <Text>SAVE</Text>
             </View>
           </View>
-          <View style={{flex: 1}}>
+          <View style={{flex: 1, marginTop: 10,}}>
             <Text>수량 : 1</Text>
           </View>
         </View>
@@ -127,13 +129,12 @@ const Cart = ({navigation}) => {
             }}>
             {/* 9 */}
             <View style={{flex: 4}}>
-              <Text>Bag Total</Text>
+              <Text>장바구니 합계</Text>
             </View>
             {/* 10 */}
             <View style={{flex: 1}}>
               <Text>
-                {/* ₹{price} */}
-                상품가격
+                {price}
               </Text>
             </View>
           </View>
@@ -148,13 +149,12 @@ const Cart = ({navigation}) => {
             }}>
             {/* 12 */}
             <View style={{flex: 4}}>
-              <Text>Shipping Charge</Text>
+              <Text>배송비</Text>
             </View>
             {/* 13 */}
             <View style={{flex: 1}}>
               <Text>
-                {/* ₹{price} */}
-                상품가격
+                {price}
               </Text>
             </View>
           </View>
@@ -170,12 +170,12 @@ const Cart = ({navigation}) => {
             }}>
             {/* 15 */}
             <View style={{flex: 4}}>
-              <Text>Product Discount</Text>
+              <Text>총 할인금액</Text>
             </View>
             {/* 16 */}
             <View style={{flex: 1}}>
               <Text style={{color: '#00964D'}}>
-                {/* - ₹{discount_value} */}23231
+                - {discount_value}
               </Text>
             </View>
           </View>
@@ -189,12 +189,11 @@ const Cart = ({navigation}) => {
               justifyContent: 'flex-end',
             }}>
             <View style={{flex: 4}}>
-              <Text>Total Payable</Text>
+              <Text>총 결제금액</Text>
             </View>
             <View style={{flex: 1}}>
               <Text>
-                {/* ₹{discounted_price} */}
-                34938492
+                {discounted_price}
               </Text>
             </View>
           </View>
