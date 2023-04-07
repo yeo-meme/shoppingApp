@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
 
 import {ScrollView} from 'react-native-gesture-handler';
-import React, {startTransition} from 'react';
+import React, {startTransition, useEffect} from 'react';
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {makeMutable} from 'react-native-reanimated';
 import {Text} from '@react-native-material/core';
@@ -12,6 +12,13 @@ import images from '../constants/images';
 import icons from '../constants/icons';
 
 const Cart = ({navigation}) => {
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerShown: true
+    });
+  },[]);
+
   const discount_value = Math.round(30000 / 40);
   const discounted_price = Math.round(60000 - discount_value);
 

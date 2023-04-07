@@ -40,11 +40,11 @@ export default function AppNavigator() {
            options={{drawerLabel: 'Products'}}
            component={ProductListNavigator}
          />
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="Categories"
           options={{drawerLabel: 'Events'}}
           component={MenuNavigator}
-        />
+        /> */}
       </Drawer.Navigator>
     </NavigationContainer>
   );

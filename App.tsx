@@ -7,18 +7,18 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import AppNavigator from './navigations/AppNavigator';
-import { NativeBaseProvider, Box } from "native-base";
-// import { ClothesProvider } from './src/context';
-import { React$Node } from './src/types/AppTypes';
+import {NativeBaseProvider, Box} from 'native-base';
+import {ClothesProvider} from './src/context';
+import {React$Node} from './src/types/AppTypes';
 
 // /JSX.Element
-const App: () => JSX.Element = () => {
+const App: () => React$Node = () => {
   return (
     <NativeBaseProvider>
-      {/* <ClothesProvider> */}
-     <AppNavigator/>
-     {/* </ClothesProvider> */}
-     </NativeBaseProvider>
+      <ClothesProvider>
+        <AppNavigator />
+      </ClothesProvider>
+    </NativeBaseProvider>
   );
 };
 

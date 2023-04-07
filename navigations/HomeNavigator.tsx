@@ -60,7 +60,7 @@ function HomeTabs() {
         options={{
           tabBarLabel: '홈',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="home-circle" color={color} size={size} />
           ),     }}
       />
 

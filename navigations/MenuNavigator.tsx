@@ -28,7 +28,7 @@ export default function MenuNavigator() {
     <Stack.Navigator
       initialRouteName={'Category'}
       screenOptions={{headerShown: true}}>
-      <Stack.Screen
+      {/* <Stack.Screen
         name="Events"
         component={Category}
         options={{
@@ -50,7 +50,7 @@ export default function MenuNavigator() {
             </TouchableOpacity>
           ),
         }}
-      />
+      /> */}
       {/* <Stack.Screen name="Product" component={Product} /> */}
       <Stack.Screen name="Cart" component={Cart} />
       {/* <Stack.Screen name="Detail" component={Detail} /> */}

@@ -1,11 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, ReactElement} from 'react';
 import { TrendingDummyData } from '../data/TrendingDummyData';
 import { API_CLOTHES, API_AVAILABLE_CLOTHES, API_SETTING } from '../../constants/constants'
 import {TrendingType} from '../types/DataTypes';
 
 const ClothesContext = React.createContext({});
 
-const ClothesProvider: React.FC = (props) => {
+interface Props {
+  children: ReactElement;
+}
+
+const ClothesProvider: React.FC<Props> = (props) => {
   //Dummy
   const [trending, setTrending] = useState<TrendingType[]>(TrendingDummyData);
   const [trendingClothes, setTrendingClothes] = useState<TrendingType[]>([]);
@@ -41,10 +45,10 @@ const ClothesProvider: React.FC = (props) => {
         trending,
         trendingClothes,
       }}>
-       {/* {props.children} */}
+       {props.children}
     </ClothesContext.Provider>
-  );
-};
+  )
+}
 
 const ClothesConsumer = ClothesContext.Consumer;
 export {ClothesContext, ClothesConsumer, ClothesProvider};

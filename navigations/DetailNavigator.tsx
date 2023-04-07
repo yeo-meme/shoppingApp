@@ -20,7 +20,6 @@ export default function DetailNavigator() {
   return (
     <Stack.Navigator initialRouteName={'Detail'}>
       {/* <Stack.Screen name="Detail"component={Detail}/> */}
-      <Stack.Screen name="Events" component={Category} />
       <Stack.Screen name="Cart" component={Cart} />
       {/* <Stack.Screen name="Address" component={Address} /> */}
     </Stack.Navigator>

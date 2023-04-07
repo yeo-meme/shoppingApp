@@ -1,4 +1,4 @@
-import {images} from "../../constants/images"
+import { images } from "../../constants"
 
 export const TrendingDummyData = [
     {
@@ -73,4 +73,4 @@ export const TrendingDummyData = [
         price: '$1990',
         sizes: [6, 7, 8, 9],
     }
-]
+];
