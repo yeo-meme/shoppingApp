@@ -25,6 +25,11 @@ import {HomeStackParamList} from '../src/types/NavigationTypes';
 import Detail from '../screens/Detail';
 import {SIZES, COLORS} from '../constants/theme';
 import {ClothesContext} from '../src/context';
+import { TrendingDummyData } from '../src/data/TrendingDummyData';
+import musinsaWomen from '../src/data/musinsaWomen';
+import newData from '../src/data/newData';
+import recentData from '../src/data/RecentData'
+
 
 const data = [
   {
@@ -69,22 +74,11 @@ const data = [
   },
 ];
 
-// const Item = ({data}: any) => (
-//   <View style={styles.item}>
-//     {/* <Text style={styles.title}>{data.fu}</Text> */}
-//     <Image source={data.avatarUrl} />
-//   </View>
-// );
-
-// const Stack = createStackNavigator<HomeStackParamList>();
-
 const Home = () => {
   console.log('home.log');
 
   const navigation = useNavigation();
-  const {recentlyViewed, trending, trendingClothes} =
-    useContext(ClothesContext);
-
+  const {recentlyViewed, trending, trendingClothes} = useContext(ClothesContext);
   const [showAddToBagModal, setShowAddToBagModal] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
@@ -276,6 +270,59 @@ const Home = () => {
     });
   }
 
+  function dummyRender (item, index) { 
+    var trendingStyle = {};
+
+    if (index == 0) {
+      trendingStyle = {marginLeft: SIZES.padding};
+    } else {
+      trendingStyle = {};
+    }
+
+    return (
+      <TouchableOpacity
+        style={{
+          height: 320,
+          width: 180,
+          padding: 2,
+        }}
+        onPress={() => {
+          // setSelectedItem(item)
+          // setShowAddToBagModal(true)
+          navigation.navigate('Product', {
+            id: item.id,
+            name: item.name,
+            img: item.img,
+            type: item.type,
+            price: item.price,
+          });
+        }}>
+        <View
+          style={{
+            height: 260,
+            width: '100%',
+            padding: 8,
+            alignItems: 'flex-start',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+          }}>
+          <Image
+            source={{uri: item.img}}
+            resizeMode="contain"
+            style={{
+              flex: 3,
+              width: '100%',
+              borderRadius: 8,
+              height: 200,
+            }}
+          />
+          <Text style={{flex: 1, color: COLORS.black}}>{item.name}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
   function renderRecentlyViewed(item, index) {
     if (item.price.toString().includes('$')) { item.price = Math.round(item.price.replace('$', '')); }
     else if (!item.price.toString().includes('₹')) { item.price = '₹' + item.price; }
@@ -349,10 +396,9 @@ const Home = () => {
         {/* 최상위View */}
         <View style={styles.container}>
           {/* 1번째 리스트 : 신발 */}
-          <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
+          {/* <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
             <FlatList
               horizontal
-              // data={data}
               data={trending}
               showsHorizontalScrollIndicator={false}
               renderItem={({item, index}) => renderTrendingShoes(item, index)}
@@ -382,6 +428,27 @@ const Home = () => {
               // }
               // keyExtractor={item => item.id}
             />
+          </View> */}
+
+
+           <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
+            <FlatList
+              horizontal
+              data={trending}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item, index}) => renderTrendingShoes(item, index)}
+              keyExtractor={item => item.id.toString()}
+            />
+          </View>
+
+          <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
+            <FlatList
+              horizontal
+              data={musinsaWomen}
+              showsHorizontalScrollIndicator={false}
+              renderItem={({item, index}) => dummyRender(item, index)}
+              keyExtractor={item => item.id.toString()}
+            />
           </View>
 
           {/* 2번 리스트: 베스트 clothes */}
@@ -389,44 +456,39 @@ const Home = () => {
           <View style={{height: 260, marginTop: 2, backgroundColor: COLORS.light1}}>
             <FlatList
               horizontal
-              data={trendingClothes}
-              renderItem={({item, index}) =>
-                renderLatestClothesTrendingItems(item, index)
-              }
-              // renderItem={({item}) => (
-              //   <TouchableOpacity onPress={() => handleItemPress(item.id)}>
-              //     {/* <TouchableOpacity onPress={(onPress) => ItemOnClick(item.avatarUrl)}> */}
-              //     <Box
-              //       borderBottomWidth="1"
-              //       _dark={{
-              //         borderColor: 'muted.50',
-              //       }}
-              //       borderColor="muted.800"
-              //       pl={['0', '4']}
-              //       pr={['0', '5']}
-              //       py="2">
-              //       <HStack space={[2, 3]} justifyContent="space-between">
-              //         <Image
-              //           size="200px"
-              //           source={{
-              //             uri: item.avatarUrl,
-              //             // item.avatarUrl
-              //           }}
-              //         />
-              //       </HStack>
-              //     </Box>
-              //   </TouchableOpacity>
-              // )}
+              data={recentData}
+              renderItem={({item, index}) => renderLatestClothesTrendingItems(item, index)}
               keyExtractor={item => item.id.toString()}
             />
-            {/* <FlatList
-              horizontal
-              data={DATA}
-              renderItem={renderItem}
-              keyExtractor={item => item.id}
-            />  */}
           </View>
 
+{/* 3번째 */}
+          {/* <View
+            style={[
+              {
+                flex: 1,
+                flexDirection: 'row',
+                marginTop: SIZES.padding,
+                borderTopLeftRadius: 40,
+                borderTopRightRadius: 40,
+                backgroundColor: COLORS.white,
+              },
+              styles.recentContainerShadow,
+            ]}>
+            <View style={{flex: 1, paddingBottom: SIZES.padding}}>
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={recentlyViewed}
+                keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={FlatListItemSeparator}
+                renderItem={({item, index}) =>
+                  renderRecentlyViewed(item, index)
+                }
+              />
+            </View>
+          </View> */}
+
+          {/* 내데이터 */}
           <View
             style={[
               {
@@ -439,20 +501,10 @@ const Home = () => {
               },
               styles.recentContainerShadow,
             ]}>
-            {/* <View style={{ width: 70, marginLeft: SIZES.base }}>
-                    <Image
-                        source={images.recentlyViewedLabel}
-                        resizeMode="contain"
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                        }}
-                    />
-                </View> */}
             <View style={{flex: 1, paddingBottom: SIZES.padding}}>
               <FlatList
                 showsVerticalScrollIndicator={false}
-                data={recentlyViewed}
+                data={newData}
                 keyExtractor={item => item.id.toString()}
                 ItemSeparatorComponent={FlatListItemSeparator}
                 renderItem={({item, index}) =>
