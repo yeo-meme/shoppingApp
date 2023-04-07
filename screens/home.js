@@ -176,6 +176,147 @@ const Home = () => {
     );
   }
 
+  function renderLatestClothesTrendingItems(item, index) {
+    var trendingStyle = {};
+
+    if (index == 0) {
+      trendingStyle = {marginLeft: SIZES.padding};
+    } else {
+      trendingStyle = {};
+    }
+
+    return (
+      <TouchableOpacity
+        style={{
+          height: 320,
+          width: 180,
+          padding: 2,
+        }}
+        onPress={() => {
+          // setSelectedItem(item)
+          // setShowAddToBagModal(true)
+          navigation.navigate('Product', {
+            id: item.id,
+            name: item.name,
+            img: item.img,
+            type: item.type,
+            price: item.price,
+          });
+        }}>
+        <View
+          style={{
+            height: 260,
+            width: '100%',
+            padding: 8,
+            alignItems: 'flex-start',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+          }}>
+          <Image
+            source={{uri: item.img}}
+            resizeMode="contain"
+            style={{
+              flex: 3,
+              width: '100%',
+              borderRadius: 8,
+              height: 200,
+            }}
+          />
+          <Text style={{flex: 1, color: COLORS.black}}>{item.name}</Text>
+        </View>
+      </TouchableOpacity>
+    );
+  }
+
+  function FlatListItemSeparator() {
+    return (
+      <View
+        style={{
+          height: 0.5,
+          width: '100%',
+          backgroundColor: COLORS.lightGray,
+        }}
+      />
+    );
+  }
+
+  function renderShoeSizes() {
+    return selectedItem.sizes.map((item, index) => {
+      return (
+        <TouchableOpacity
+          key={index}
+          style={{
+            width: 35,
+            height: 25,
+            alignItems: 'center',
+            justifyContent: 'center',
+            marginHorizontal: 5,
+            marginBottom: 10,
+            backgroundColor:
+              selectedItem.sizes[index] == selectedSize ? COLORS.white : null,
+            borderWidth: 1,
+            borderColor: COLORS.white,
+            borderRadius: 5,
+          }}
+          onPress={() => {
+            setSelectedSize(item);
+          }}>
+          <Text
+            style={{
+              color:
+                selectedItem.sizes[index] == selectedSize
+                  ? COLORS.black
+                  : COLORS.white,
+            }}>
+            {item}
+          </Text>
+        </TouchableOpacity>
+      );
+    });
+  }
+
+  function renderRecentlyViewed(item, index) {
+    if (item.price.toString().includes('$')) { item.price = Math.round(item.price.replace('$', '')); }
+    else if (!item.price.toString().includes('₹')) { item.price = '₹' + item.price; }
+
+    return (
+        <TouchableOpacity
+            style={{ flex: 1, flexDirection: 'row' }}
+            onPress={() => {
+                navigation.navigate('Product', {
+                    id: item.id,
+                    name: item.name,
+                    img: item.img,
+                    type: item.type,
+                    price: item.price,
+                });
+            }}
+        >
+            <View style={{
+                flex: 2, alignItems: 'center', justifyContent: 'center', padding: 4
+            }}>
+                <Image
+                    source={{ uri: item.img }}
+                    resizeMode="contain"
+                    style={{
+                        borderRadius: 10,
+                        width: 110,
+                        height: 120,
+                        margin: 1,
+
+                    }}
+                />
+            </View>
+            <View style={{ flex: 3, marginLeft: SIZES.radius, justifyContent: 'center' }}>
+                <Text style={{ color: COLORS.black}}>{item.name}</Text>
+                <Text >{item.price}</Text>
+                <Text > 30% Off</Text>
+            </View>
+        </TouchableOpacity>
+    );
+}
+
   // demy item List text
   const renderItem = ({item}: any) => <Item data={item} />;
 
@@ -208,7 +349,7 @@ const Home = () => {
         {/* 최상위View */}
         <View style={styles.container}>
           {/* 1번째 리스트 : 신발 */}
-          <View style={{height: 260, marginTop: 5}}>
+          <View style={{height: 260, marginTop: 5,backgroundColor: COLORS.white}}>
             <FlatList
               horizontal
               // data={data}
@@ -245,34 +386,37 @@ const Home = () => {
 
           {/* 2번 리스트: 베스트 clothes */}
 
-          <View style={{height: 260, marginTop: 2}}>
+          <View style={{height: 260, marginTop: 2, backgroundColor: COLORS.light1}}>
             <FlatList
               horizontal
-              data={data}
-              renderItem={({item}) => (
-                <TouchableOpacity onPress={() => handleItemPress(item.id)}>
-                  {/* <TouchableOpacity onPress={(onPress) => ItemOnClick(item.avatarUrl)}> */}
-                  <Box
-                    borderBottomWidth="1"
-                    _dark={{
-                      borderColor: 'muted.50',
-                    }}
-                    borderColor="muted.800"
-                    pl={['0', '4']}
-                    pr={['0', '5']}
-                    py="2">
-                    <HStack space={[2, 3]} justifyContent="space-between">
-                      <Image
-                        size="200px"
-                        source={{
-                          uri: item.avatarUrl,
-                          // item.avatarUrl
-                        }}
-                      />
-                    </HStack>
-                  </Box>
-                </TouchableOpacity>
-              )}
+              data={trendingClothes}
+              renderItem={({item, index}) =>
+                renderLatestClothesTrendingItems(item, index)
+              }
+              // renderItem={({item}) => (
+              //   <TouchableOpacity onPress={() => handleItemPress(item.id)}>
+              //     {/* <TouchableOpacity onPress={(onPress) => ItemOnClick(item.avatarUrl)}> */}
+              //     <Box
+              //       borderBottomWidth="1"
+              //       _dark={{
+              //         borderColor: 'muted.50',
+              //       }}
+              //       borderColor="muted.800"
+              //       pl={['0', '4']}
+              //       pr={['0', '5']}
+              //       py="2">
+              //       <HStack space={[2, 3]} justifyContent="space-between">
+              //         <Image
+              //           size="200px"
+              //           source={{
+              //             uri: item.avatarUrl,
+              //             // item.avatarUrl
+              //           }}
+              //         />
+              //       </HStack>
+              //     </Box>
+              //   </TouchableOpacity>
+              // )}
               keyExtractor={item => item.id.toString()}
             />
             {/* <FlatList
@@ -288,41 +432,32 @@ const Home = () => {
               {
                 flex: 1,
                 flexDirection: 'row',
-                margoinTop: 10,
+                marginTop: SIZES.padding,
                 borderTopLeftRadius: 40,
                 borderTopRightRadius: 40,
+                backgroundColor: COLORS.white,
               },
+              styles.recentContainerShadow,
             ]}>
-            {/* 3번 리스트: 여성복 */}
-            <View
-              style={{
-                flex: 1,
-                paddingBottom: 10,
-              }}>
-              <FlatList
-                data={data}
-                renderItem={({item}) => (
-                  <Box
-                    borderBottomWidth="1"
-                    _dark={{
-                      borderColor: 'muted.50',
-                    }}
-                    borderColor="muted.800"
-                    pl={['0', '4']}
-                    pr={['0', '5']}
-                    py="2">
-                    <HStack space={[2, 3]} justifyContent="space-between">
-                      <Image
-                        size="400px"
-                        source={{
-                          uri: item.avatarUrl,
-                          // item.avatarUrl
+            {/* <View style={{ width: 70, marginLeft: SIZES.base }}>
+                    <Image
+                        source={images.recentlyViewedLabel}
+                        resizeMode="contain"
+                        style={{
+                            width: "100%",
+                            height: "100%",
                         }}
-                      />
-                    </HStack>
-                  </Box>
-                )}
+                    />
+                </View> */}
+            <View style={{flex: 1, paddingBottom: SIZES.padding}}>
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                data={recentlyViewed}
                 keyExtractor={item => item.id.toString()}
+                ItemSeparatorComponent={FlatListItemSeparator}
+                renderItem={({item, index}) =>
+                  renderRecentlyViewed(item, index)
+                }
               />
             </View>
           </View>
