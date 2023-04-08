@@ -11,21 +11,19 @@ import {
   StackNavigationProp,
 } from '@react-navigation/stack';
 import {Image, Text, View} from 'react-native';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import { SIZES } from '../constants/theme';
+import {TouchableOpacity} from 'react-native-gesture-handler';
+import {SIZES} from '../constants/theme';
 import icons from '../constants/icons';
-import Ionicons from 'react-native-vector-icons/Ionicons'
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // screens
 import Category from '../screens/Categories';
-import Home from '../screens/home';
+import Home from '../screens/Home';
 import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
-import MyPage from '../screens/Mypage'
-import { Icon } from 'native-base';
-
-
+import MyPage from '../screens/Mypage';
+import {Icon} from 'native-base';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -49,9 +47,7 @@ const Second = () => {
 // Bottom Sheet Menu
 function HomeTabs() {
   return (
-    <Tab.Navigator initialRouteName="Home"
-    screenOptions={{ headerShown: false }}
->
+    <Tab.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
       {/* bottom navi */}
 
       {/* 1: home */}
@@ -61,8 +57,13 @@ function HomeTabs() {
         options={{
           tabBarLabel: '홈',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="home-circle" color={color} size={size} />
-          ),     }}
+            <MaterialCommunityIcons
+              name="home-outline"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
       />
 
       {/* 2: category */}
@@ -72,12 +73,11 @@ function HomeTabs() {
         options={{
           tabBarLabel: '이벤트',
           tabBarIcon: ({color, size}) => (
-            <Icon as={Ionicons} name="home" size={size} color={color} />
-            // <MaterialCommunityIcons
-            //   name="format-list-bulleted-square"
-            //   color={color}
-            //   size={size}
-            // />
+            <MaterialCommunityIcons
+              name="history"
+              color={color}
+              size={size}
+            />
           ),
         }}
       />
@@ -136,37 +136,34 @@ function HomeTabs() {
 export default function HomeNavigator() {
   const navigation = useNavigation<StackNavigationProp<HomeStackParamList>>();
   return (
-    <Stack.Navigator initialRouteName="Home"
-    screenOptions={{ headerShown: true }}>
-
+    <Stack.Navigator
+      initialRouteName="Home"
+      screenOptions={{headerShown: true}}>
       <Stack.Screen
         name="Home"
         component={HomeTabs}
         options={{
-          title:'무신사',
-          headerLeft: ({ onPress }) => (
+          title: '무신사',
+          headerLeft: ({onPress}) => (
             <TouchableOpacity
-            style={{ marginLeft: SIZES.padding }}
-                onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
-                <Image
-                    source={icons.menu}
-                    resizeMode="contain"
-                    style={{
-                        width: 25,
-                        height: 25,
-                    }}
-                />
+              style={{marginLeft: SIZES.padding}}
+              onPress={() => navigation.dispatch(DrawerActions.openDrawer())}>
+              <Image
+                source={icons.menu}
+                resizeMode="contain"
+                style={{
+                  width: 25,
+                  height: 25,
+                }}
+              />
             </TouchableOpacity>
-        ),
+          ),
         }}
-        />
-      <Stack.Screen 
-      name="Category" 
-      component={Category}
       />
+      <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Detail" component={Detail} />
-
     </Stack.Navigator>
   );
 }
+

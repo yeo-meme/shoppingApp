@@ -22,7 +22,7 @@ import {
   StackNavigationPro,
 } from '@react-navigation/stack';
 import {HomeStackParamList} from '../src/types/NavigationTypes';
-import Detail from '../screens/Detail';
+import Detail from './Detail';
 import {SIZES, COLORS} from '../constants/theme';
 import {ClothesContext} from '../src/context';
 import {TrendingDummyData} from '../src/data/TrendingDummyData';
@@ -74,7 +74,7 @@ const data = [
 ];
 
 const Home = () => {
-  console.log('home.log');
+  // console.log('home.log');
 
   const navigation = useNavigation();
   const {recentlyViewed, trending, trendingClothes} =
@@ -111,7 +111,7 @@ const Home = () => {
         onPress={() => {
           setSelectedItem(item);
           setShowAddToBagModal(true);
-          navigation.navigate('Detail');
+          // navigation.navigate('Detail');
         }}>
         <Text style={{color: COLORS.gray}}>{item.type}</Text>
 
@@ -146,12 +146,6 @@ const Home = () => {
             width: '95%',
             height: '100%',
           }}>
-          {/* <Svg height="100%" width="100%">
-                    <Polygon
-                        points="0,0 160,0 160,80"
-                        fill="white"
-                    />
-                </Svg> */}
         </View>
 
         <Image
@@ -169,7 +163,7 @@ const Home = () => {
         />
       </TouchableOpacity>
     );
-  }
+  };
 
   function renderLatestClothesTrendingItems(item, index) {
     var trendingStyle = {};
