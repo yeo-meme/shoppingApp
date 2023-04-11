@@ -1,0 +1,78 @@
+
+  export const RecentData = [
+    
+    {
+        id: 0,
+        name: 'Rangriti Blue Printed A-Line Dress',
+        price: 1079,
+        brand_name: 'Rangriti',
+        offer: '40% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20220822/2731576/2731576_2_500.jpg',
+        type: 'women',
+    },
+    {
+        id: 1,
+        name: 'GAP Purple Full Length Shirt Dress',
+        price: 2098,
+        brand_name: 'GAP',
+        offer: '45% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20230213/3078392/3078392_16800769563057_500.jpg',
+        type: 'women',
+    },
+    {
+        id: 2,
+        name: 'PlusS Mustard Floral Print Dress',
+        price: 809,
+        brand_name: 'PlusS',
+        offer: '70% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20220823/2734385/2734385_2_500.jpg',
+        type: 'women',
+    },
+    {
+        id: 3,
+        name: 'PlusS Yellow Printed Below Knee Dress',
+        price: 689,
+        brand_name: 'PlusS',
+        offer: '70% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20190507/1036763/1036763_1_500.jpg',
+        type: 'women',
+    },
+    {
+        id: 4,
+        name: 'Rangriti Blue Printed A-Line Dress',
+        price: 1079,
+        brand_name: 'Rangriti',
+        offer: '40% Off',
+        img: 'https://img.tatacliq.com/images/i6/437Wx649H/MP000000007288363_437Wx649H_20200716044236.jpeg',
+        type: 'women',
+    },
+    {
+        id: 5,
+        name: 'GAP Purple Full Length Shirt Dress',
+        price: 2098,
+        brand_name: 'GAP',
+        offer: '45% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20220617/2622514/2622514_1_500.jpg',
+        type: 'women',
+    },
+    {
+        id: 6,
+        name: 'PlusS Mustard Floral Print Dress',
+        price: 809,
+        brand_name: 'PlusS',
+        offer: '70% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20220330/2457512/2457512_2_500.jpg',
+        type: 'women',
+    },
+    {
+        id: 7,
+        name: 'PlusS Yellow Printed Below Knee Dress',
+        price: 689,
+        brand_name: 'PlusS',
+        offer: '70% Off',
+        img: 'https://image.msscdn.net/images/goods_img/20220913/2785168/2785168_16806527476949_500.jpg',
+        type: 'women',
+    },
+];
+
+export default RecentData;

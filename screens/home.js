@@ -285,7 +285,7 @@ const Home = () => {
           // setSelectedItem(item)
           // setShowAddToBagModal(true)
           navigation.navigate('Detail', {
-            id: item.id,
+            // id: item.id,
             name: item.name,
             img: item.img,
             type: item.type,
