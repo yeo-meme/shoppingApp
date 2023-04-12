@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 
-import React, {useContext, useState, useLayoutEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -21,14 +21,25 @@ import {
   createStackNavigator,
   StackNavigationPro,
 } from '@react-navigation/stack';
-import {HomeStackParamList} from '../src/types/NavigationTypes';
-import Detail from './Detail';
-import {SIZES, COLORS} from '../constants/theme';
 import {ClothesContext} from '../src/context';
-import {TrendingDummyData} from '../src/data/TrendingDummyData';
+
+
+//dataStruct
+import {HomeStackParamList} from '../src/types/NavigationTypes';
+
+//screen
+import Detail from './Detail';
+
+
+//style
+import {SIZES, COLORS} from '../constants/theme';
+
+//Data
 import musinsaWomen from '../src/data/MusinsaWomen';
 import newData from '../src/data/NewData';
 import recentData from '../src/data/RecentData';
+// import {TrendingDummyData} from '../src/data/TrendingDummyData';
+
 
 const data = [
   {
@@ -83,10 +94,10 @@ const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedSize, setSelectedSize] = useState('');
 
-  const handleItemPress = itemId => {
-    navigation.navigate('Detail', {id: itemId, headerShown: true});
-    console.log('home.touch.log');
-  };
+  // const handleItemPress = itemId => {
+  //   navigation.navigate('Detail', {id: itemId, headerShown: true});
+  //   console.log('home.touch.log');
+  // };
 
   function renderTrendingShoes(item, index) {
     var trendingStyle = {};
@@ -319,10 +330,10 @@ const Home = () => {
   }
 
   function renderRecentlyViewed(item, index) {
-    if (item.price.toString().includes('$')) {
-      item.price = Math.round(item.price.replace('$', ''));
-    } else if (!item.price.toString().includes('₹')) {
-      item.price = '₹' + item.price;
+    if (item.price.toString().includes('₩')) {
+      item.price = Math.round(item.price.replace('₩', ''));
+    } else if (!item.price.toString().includes('₩')) {
+      item.price = '₩' + item.price;
     }
 
     return (
@@ -397,22 +408,24 @@ const Home = () => {
         {/* 최상위View */}
         <View style={styles.container}>
           {/* 1번째 리스트 : 신발 */}
-          {/* <View
+          <View
             style={{height: 260, marginTop: 5, backgroundColor: COLORS.white}}>
             <FlatList
               horizontal
               data={trending}
               showsHorizontalScrollIndicator={false}
+              nestedScrollEnabled={false}
               renderItem={({item, index}) => renderTrendingShoes(item, index)}
               keyExtractor={item => item.id.toString()}
             />
-          </View> */}
+          </View>
 
           <View
             style={{height: 260, marginTop: 2, backgroundColor: COLORS.white}}>
             <FlatList
               horizontal
               data={musinsaWomen}
+              nestedScrollEnabled={false}
               showsHorizontalScrollIndicator={false}
               renderItem={({item, index}) => twoLineListRender(item, index)}
               keyExtractor={item => item.id.toString()}
@@ -426,6 +439,7 @@ const Home = () => {
             <FlatList
               horizontal
               data={recentData}
+              nestedScrollEnabled={false}
               renderItem={({item, index}) =>
                 renderLatestClothesTrendingItems(item, index)
               }
@@ -476,6 +490,7 @@ const Home = () => {
               <FlatList
                 showsVerticalScrollIndicator={false}
                 data={newData}
+                nestedScrollEnabled={false}
                 keyExtractor={item => item.id.toString()}
                 ItemSeparatorComponent={FlatListItemSeparator}
                 renderItem={({item, index}) =>
