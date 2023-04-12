@@ -13,6 +13,7 @@ import icons from '../constants/icons';
 import {ProductsDummyData} from '../src/data';
 import {ProductType} from '../src/types/DataTypes';
 import images from '../constants/images';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const TasteSection: React.FC = () => {
   const navigation = useNavigation();
@@ -21,6 +22,9 @@ const TasteSection: React.FC = () => {
   function renderProductList(item: ProductType, index: number) {
     console.log("내취향");
     return (
+      <ScrollView>
+      <View>
+      
       <View
         style={{
           backgroundColor: '#e5e5e5',
@@ -72,6 +76,8 @@ const TasteSection: React.FC = () => {
           </View>
         </TouchableOpacity>
       </View>
+      </View>
+      </ScrollView>
     );
   }
 };

@@ -23,6 +23,7 @@ import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import MyPage from '../screens/Mypage';
+import MyTaste from '../screens/MyTaste';
 import {Icon} from 'native-base';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
@@ -84,7 +85,7 @@ function HomeTabs() {
       {/* 3: Brand */}
       <Tab.Screen
         name="Brand"
-        component={ProductList}
+        component={MyTaste}
         options={{
           tabBarLabel: '내취향',
           tabBarIcon: ({color, size}) => (

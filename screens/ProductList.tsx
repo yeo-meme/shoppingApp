@@ -9,12 +9,14 @@ import {
   FlatListProps,
   TouchableOpacity,
 } from 'react-native';
+
 import {useNavigation} from '@react-navigation/native';
 import icons from '../constants/icons';
 import {ProductsDummyData} from '../src/data/ProductsDummyData'
 import {ProductType} from '../src/types/DataTypes';
 import images from '../constants/images';
 import { COLORS } from '../constants/theme';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const ProductList: React.FC = () => {
   const navigation = useNavigation();
@@ -30,6 +32,9 @@ const ProductList: React.FC = () => {
 
   function renderProductList(item: ProductType, index: number) {
     return (
+      <ScrollView>
+     <View>
+  
       <View
         style={{
           backgroundColor: '#e5e5e5',
@@ -89,27 +94,26 @@ const ProductList: React.FC = () => {
                 style={{
                   color: COLORS.cat_title_color
                 }}>
-                {/* {item.brand_name} */}
-                브랜드네임
+                {item.brand_name}
               </Text>
               <Text
                 style={{ color: COLORS.black}}>
-                {/* {item.name} */}
-                아이템네임
+                {item.name}
               </Text>
 
               <Text
                 style={{
                   color: COLORS.cat_title_color
                 }}>
-                  아이템가격
-                {/* ₹{item.price} */}
+                {item.price}
               </Text>
             </View>
 
           </View>
         </TouchableOpacity>
       </View>
+      </View> 
+      </ScrollView>
     );
   }
 
