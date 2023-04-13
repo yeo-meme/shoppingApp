@@ -23,7 +23,6 @@ import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import MyPage from '../screens/Mypage';
-import MyTaste from '../screens/MyTaste';
 import {Icon} from 'native-base';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
@@ -82,21 +81,6 @@ function HomeTabs() {
           ),
         }}
       />
-      {/* 3: Brand */}
-      <Tab.Screen
-        name="Brand"
-        component={MyTaste}
-        options={{
-          tabBarLabel: '내취향',
-          tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="cards-outline"
-              color={color}
-              size={size}
-            />
-          ),
-        }}
-      />
 
       {/* 4: Account */}
       <Tab.Screen
@@ -115,7 +99,7 @@ function HomeTabs() {
       />
 
       {/* 5: MyBag */}
-      <Tab.Screen
+      {/* <Tab.Screen
         name="MyBag"
         component={Cart}
         options={{
@@ -128,7 +112,7 @@ function HomeTabs() {
             />
           ),
         }}
-      />
+      /> */}
     </Tab.Navigator>
   );
 }
