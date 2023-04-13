@@ -33,23 +33,19 @@ import musinsaWomen from '../src/data/MusinsaWomen';
 import newData from '../src/data/NewData';
 import recentData from '../src/data/RecentData';
 
-
 const Home = () => {
-
   const navigation = useNavigation();
-  const {trending} =
-    useContext(ClothesContext);
+  const {trending} = useContext(ClothesContext);
   // const [showAddToBagModal, setShowAddToBagModal] = useState(false);
   // const [selectedItem, setSelectedItem] = useState(null);
   // const [selectedSize, setSelectedSize] = useState('');
 
-
-  function renderTrendingShoes(item : Item, index: number) {
-    var trendingStyle: {marginLeft? : number} ={};
+  function renderTrendingShoes(item: Item, index: number) {
+    var trendingStyle: {marginLeft?: number} = {};
 
     if (index == 0) {
       trendingStyle = {marginLeft: SIZES.padding};
-    } 
+    }
     return (
       <TouchableOpacity
         style={{
@@ -59,7 +55,7 @@ const Home = () => {
           marginHorizontal: SIZES.base,
         }}
         onPress={() => {
-          setSelectedItem(item);
+          // setSelectedItem(item);
           setShowAddToBagModal(true);
         }}>
         <Text style={{color: COLORS.gray}}>{item.type}</Text>
@@ -94,8 +90,7 @@ const Home = () => {
             right: 0,
             width: '95%',
             height: '100%',
-          }}>
-        </View>
+          }}></View>
 
         <Image
           source={item.img}
@@ -112,9 +107,9 @@ const Home = () => {
         />
       </TouchableOpacity>
     );
-  };
+  }
 
-  function renderLatestClothesTrendingItems(item : Item, index: number) {
+  function renderLatestClothesTrendingItems(item: Item, index: number) {
     var trendingStyle = {};
 
     if (index == 0) {
@@ -179,7 +174,7 @@ const Home = () => {
     );
   }
 
-  function twoLineListRender(item : Item, index: number) {
+  function twoLineListRender(item: Item, index: number) {
     var trendingStyle = {};
 
     if (index == 0) {
@@ -232,7 +227,7 @@ const Home = () => {
     );
   }
 
-  function renderRecentlyViewed(item : Item, index: number) {
+  function renderRecentlyViewed(item: Item, index: number) {
     if (item.price.toString().includes('₩')) {
       item.price = Math.round(item.price.replace('₩', ''));
     } else if (!item.price.toString().includes('₩')) {
@@ -292,7 +287,12 @@ const Home = () => {
               data={trending}
               showsHorizontalScrollIndicator={false}
               nestedScrollEnabled={false}
-              renderItem={({item, index}) => renderTrendingShoes(item, index)}
+              //typescript
+              renderItem={({item, index}: {item: trending, index: number}) =>
+                renderTrendingShoes(item, index)
+              }
+              // javascript>>
+              // renderItem={({item, index}) => renderTrendingShoes(item, index)}
               keyExtractor={item => item.id.toString()}
             />
           </View>
@@ -304,7 +304,15 @@ const Home = () => {
               data={musinsaWomen}
               nestedScrollEnabled={false}
               showsHorizontalScrollIndicator={false}
-              renderItem={({item, index}) => twoLineListRender(item, index)}
+              //typescript
+              renderItem={({
+                item,
+                index,
+              }: {
+                item: musinsaWomen,
+                index: number,
+              }) => twoLineListRender(item, index)}
+              // renderItem={({item, index}) => twoLineListRender(item, index)}
               keyExtractor={item => item.id.toString()}
             />
           </View>
@@ -317,9 +325,13 @@ const Home = () => {
               horizontal
               data={recentData}
               nestedScrollEnabled={false}
-              renderItem={({item, index}) =>
+              //typescript
+              renderItem={({item, index}: {item: recentData, index: number}) =>
                 renderLatestClothesTrendingItems(item, index)
               }
+              // renderItem={({item, index}) =>
+              //   renderLatestClothesTrendingItems(item, index)
+              // }
               keyExtractor={item => item.id.toString()}
             />
           </View>
@@ -344,9 +356,13 @@ const Home = () => {
                 nestedScrollEnabled={false}
                 keyExtractor={item => item.id.toString()}
                 ItemSeparatorComponent={FlatListItemSeparator}
-                renderItem={({item, index}) =>
+                //typescript
+                renderItem={({item, index}: {item: newData, index: number}) =>
                   renderRecentlyViewed(item, index)
                 }
+                // renderItem={({item, index}) =>
+                //   renderRecentlyViewed(item, index)
+                // }
               />
             </View>
           </View>

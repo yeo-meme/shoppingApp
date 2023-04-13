@@ -11,7 +11,15 @@ import {
 import {ScrollView} from 'react-native-gesture-handler';
 import {Box, HStack, Avatar, VStack, Heading, Input} from 'native-base';
 import {COLORS} from '../constants';
+import {AsyncStorage} from 'react-native';
+
 const Join = () => {
+    // const test = () => {
+    //     AsyncStorage.setItem('id','userId0', ()=> {
+    //         console.log("저장되었습니다")
+    //     });
+    // }
+
   return (
     <View style={styles.formContainer}>
       <View style={styles.formSpacer} > 
@@ -35,7 +43,7 @@ const Join = () => {
       <View style={styles.formSpacer} marginTop={20}>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => navigation.navigate('Join')}>
+          onPress={() => {}}>
           <Text style={styles.buttonText}>회원가입</Text>
         </TouchableOpacity>
       </View>

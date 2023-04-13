@@ -37,8 +37,8 @@ function HomeTabs() {
     <Tab.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
       {/* bottom navi */}
 
-      {/* 1: home */}
-      <Tab.Screen
+      {/* 1: home  */}
+        <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -51,7 +51,7 @@ function HomeTabs() {
             />
           ),
         }}
-      />
+      /> 
 
       {/* 2: category */}
       <Tab.Screen
