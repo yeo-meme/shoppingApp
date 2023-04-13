@@ -37,24 +37,19 @@ import recentData from '../src/data/RecentData';
 const Home = () => {
 
   const navigation = useNavigation();
-  const {recentlyViewed, trending, trendingClothes} =
+  const {trending} =
     useContext(ClothesContext);
-  const [showAddToBagModal, setShowAddToBagModal] = useState(false);
-  const [selectedItem, setSelectedItem] = useState(null);
-  const [selectedSize, setSelectedSize] = useState('');
+  // const [showAddToBagModal, setShowAddToBagModal] = useState(false);
+  // const [selectedItem, setSelectedItem] = useState(null);
+  // const [selectedSize, setSelectedSize] = useState('');
 
 
   function renderTrendingShoes(item : Item, index: number) {
-    // var trendingStyle = {};
     var trendingStyle: {marginLeft? : number} ={};
 
     if (index == 0) {
       trendingStyle = {marginLeft: SIZES.padding};
     } 
-
-    // if (item.price.toString().includes('$')) { item.price = Math.round(item.price.replace('$', '')); }
-    // else if (!item.price.toString().includes('₹')) { item.price = '₹' + item.price; }
-
     return (
       <TouchableOpacity
         style={{
@@ -66,7 +61,6 @@ const Home = () => {
         onPress={() => {
           setSelectedItem(item);
           setShowAddToBagModal(true);
-          // navigation.navigate('Detail');
         }}>
         <Text style={{color: COLORS.gray}}>{item.type}</Text>
 

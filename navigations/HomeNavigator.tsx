@@ -14,35 +14,21 @@ import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SIZES} from '../constants/theme';
 import icons from '../constants/icons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+// import Ionicons from 'react-native-vector-icons/Ionicons';
 
 // screens
 import Category from '../screens/Categories';
 import Home from '../screens/Home';
-import ProductList from '../screens/ProductList';
+// import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import MyPage from '../screens/Mypage';
-import {Icon} from 'native-base';
+import MyTaste from '../screens/MyTaste';
+// import {Icon} from 'native-base';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
 const Stack = createStackNavigator<HomeStackParamList>();
 
-const First = () => {
-  return (
-    <View>
-      <Text>This is first screen</Text>
-    </View>
-  );
-};
-
-const Second = () => {
-  return (
-    <View>
-      <Text>This is second screen</Text>
-    </View>
-  );
-};
 
 // Bottom Sheet Menu
 function HomeTabs() {
@@ -73,11 +59,19 @@ function HomeTabs() {
         options={{
           tabBarLabel: '이벤트',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons
-              name="history"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="history" color={color} size={size} />
+          ),
+        }}
+      />
+
+      {/* 3: category */}
+      <Tab.Screen
+        name="Brand"
+        component={MyTaste}
+        options={{
+          tabBarLabel: '내취향',
+          tabBarIcon: ({color, size}) => (
+            <MaterialCommunityIcons name="history" color={color} size={size} />
           ),
         }}
       />
@@ -151,4 +145,3 @@ export default function HomeNavigator() {
     </Stack.Navigator>
   );
 }
-
