@@ -8,7 +8,7 @@ import { TouchableOpacity } from 'react-native';
 
 // navigators
 import MenuNavigator from './MenuNavigator';
-import AddressNavigator from './AddressNavigator';
+// import AddressNavigator from './AddressNavigator';
 import ProductListNavigator from './ProductListnavigator';
 
 
@@ -25,11 +25,11 @@ export default function AppNavigator() {
           }}
           component={HomeNavigator}
         />
-        <Drawer.Screen
+        {/* <Drawer.Screen
           name="Address"
           options={{drawerLabel: 'Address'}}
           component={AddressNavigator}
-        />
+        /> */}
          {/* <Drawer.Screen
          name="Login"
            options={{drawerLabel: 'Login'}}

@@ -7,7 +7,7 @@ import {
 import {useNavigation} from '@react-navigation/native';
 import {HomeStackParamList} from '../src/types/NavigationTypes';
 // screens
-import Address from '../screens/Forms/Address';
+// import Address from '../screens/Forms/Address';
 import Cart from '../screens/Cart';
 import Category from '../screens/Categories';
 import Detail from '../screens/Detail';

@@ -18,9 +18,14 @@ import {
   NativeBaseProvider,
   VStack,
 } from 'native-base';
+import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../constants';
+import Join from './Join';
 
 const MyPage = () => {
+
+ const navigation = useNavigation();
+
   return (
     <View style={{height: '100%', width: '100%', backgroundColor: '#ffffff'}}>
       <View>
@@ -50,47 +55,11 @@ const MyPage = () => {
                 <Text style={styles.buttonText_login}>로그인</Text>
               </TouchableOpacity>
 
-              <TouchableOpacity style={styles.button_join}>
+              <TouchableOpacity style={styles.button_join} onPress={()=>  navigation.navigate('Join')}>
                 <Text style={styles.buttonText_join}>회원가입</Text>
               </TouchableOpacity>
             </View>
 
-            {/* <View>
-              <View>
-                <Box alignSelf="center">
-                  <View style={styles.container}>
-                    <Text>할인받을 코드를 입력하세요</Text>
-                  </View>
-                </Box>
-              </View>
-
-              <Box alignSelf="center">
-                <View style={styles.container}>
-                  <Text>성함</Text>
-                </View>
-                <Input placeholder="Input" w="80%" />
-              </Box>
-
-              <Box alignSelf="center">
-                <View style={styles.container}>
-                  <Text>연락처</Text>
-                </View>
-                <Input placeholder="Input" w="80%" />
-              </Box>
-              <View>
-                <TextInput
-                  style={{backgroundColor: '#ececec'}}
-                  placeholder={'예) 000-0000-0000'}
-                  keyboardType={'numeric'}
-                  maxLength={12}
-                  returnKeyType={'done'}
-                  placeholderTextColor={'#212121'}></TextInput>
-              </View>
-            </View> */}
-
-            {/* <Box alignItems="center">
-              <View style={styles.submitBtn} />
-            </Box> */}
           </VStack>
         </ScrollView>
       </View>

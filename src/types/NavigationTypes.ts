@@ -27,6 +27,7 @@ export type HomeStackParamList = {
   ProductList: undefined;
   Splashscreen: undefined;
   Detail: undefined;
+  Join: undefined;
 };
 
 export type LoginStackParamList = {

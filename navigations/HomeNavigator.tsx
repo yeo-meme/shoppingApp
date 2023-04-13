@@ -24,6 +24,7 @@ import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
 import MyPage from '../screens/Mypage';
 import MyTaste from '../screens/MyTaste';
+import Join from '../screens/Join';
 // import {Icon} from 'native-base';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
@@ -142,6 +143,7 @@ export default function HomeNavigator() {
       <Stack.Screen name="Category" component={Category} />
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Detail" component={Detail} />
+      <Stack.Screen name="Join" component={Join} />
     </Stack.Navigator>
   );
 }
