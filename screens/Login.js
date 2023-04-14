@@ -15,8 +15,10 @@ import {
   Box,
   Button,
   Center,
+  Avatar,
   NativeBaseProvider,
   VStack,
+  Spacer,
   HStack,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
@@ -89,7 +91,7 @@ const Login = () => {
     getData();
   }, []);
 
-  const storeData = async (updateInfo) => {
+  const storeData = async updateInfo => {
     try {
       const jsonValue = JSON.stringify(updateInfo);
       await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
@@ -140,7 +142,41 @@ const Login = () => {
               <View style={styles.profile}>
                 <Text>{mainData.id}</Text>
               </View>
-
+            </HStack>
+          </View>
+          <View>
+            {/* 프로필 */}
+            <HStack
+              space={[2, 3]}
+              justifyContent="space-between"
+              marginBottom={3}
+              marginTop={5}>
+              <Avatar
+                size="35px"
+                source={
+                  {
+                    // uri: item.proimg,
+                  }
+                }
+              />
+              <VStack space={1}>
+                <Text
+                  _dark={{
+                    color: 'warmGray.50',
+                  }}
+                  color="coolGray.800"
+                  bold>
+                  {mainData.id}
+                </Text>
+                <Text
+                  color="coolGray.600"
+                  _dark={{
+                    color: 'warmGray.200',
+                  }}>
+                  {/* {item.brand_name} */}
+                </Text>
+              </VStack>
+              <Spacer />
               <View>
                 <TouchableOpacity
                   style={styles.button_logout}
@@ -149,15 +185,87 @@ const Login = () => {
                 </TouchableOpacity>
               </View>
             </HStack>
-          </View>
-          <View>
-            <HStack>
-              <Text>사용가능한 쿠폰:</Text>
-              <Text>3개</Text>
+
+            {/* 팔로우 */}
+            <HStack
+              space={[2, 3]}
+              justifyContent="space-between"
+              marginBottom={3}
+              marginTop={5}>
+              <Avatar
+                size="35px"
+                source={
+                  {
+                    // uri: item.proimg,
+                  }
+                }
+              />
+              <VStack space={1}>
+                <Text
+                  _dark={{
+                    color: 'warmGray.50',
+                  }}
+                  color="coolGray.800"
+                  bold>
+                팔로우
+                </Text>
+                <Text
+                  color="coolGray.600"
+                  _dark={{
+                    color: 'warmGray.200',
+                  }}>
+                    {mainData.follow}
+                </Text>
+              </VStack>
+              <Spacer />
+              <View>
+                <TouchableOpacity
+                  style={styles.button_logout}
+                  >
+                  <Text>관리</Text>
+                </TouchableOpacity>
+              </View>
             </HStack>
-            <HStack>
-              <Text>팔로우:</Text>
-              <Text>3개</Text>
+
+             {/* 쿠폰 */}
+             <HStack
+              space={[2, 3]}
+              justifyContent="space-between"
+              marginBottom={3}
+              marginTop={5}>
+              <Avatar
+                size="35px"
+                source={
+                  {
+                    // uri: item.proimg,
+                  }
+                }
+              />
+              <VStack space={1}>
+                <Text
+                  _dark={{
+                    color: 'warmGray.50',
+                  }}
+                  color="coolGray.800"
+                  bold>
+                쿠폰
+                </Text>
+                <Text
+                  color="coolGray.600"
+                  _dark={{
+                    color: 'warmGray.200',
+                  }}>
+                    {mainData.coupon}
+                </Text>
+              </VStack>
+              <Spacer />
+              <View>
+                <TouchableOpacity
+                  style={styles.button_logout}
+                  >
+                  <Text>관리</Text>
+                </TouchableOpacity>
+              </View>
             </HStack>
           </View>
         </View>

@@ -70,7 +70,38 @@ const Mypage = () => {
         <LoginNavigator />
       ) : ( */}
         <View style={styles.container}>
+
           <View>
+              <VStack>
+          <Image
+            source={eventData.event_banner}
+            style={{height: 600, width: '100%', resizeMode: 'contain'}}
+          />
+          <Heading fontSize="xl" pl="17px" pt="70px">
+            깜짝 위클리 10% 쿠폰까지
+          </Heading>
+          <Text style={{paddingLeft: 17}}>
+            트렌드 럭셔리 구매 고객이라면 누구나
+          </Text>
+
+          <View style={{ padding: 20, paddingBottom: 0}}>
+            <Image
+              source={eventData.coupon1}
+              resizeMode="stretch"
+              style={{height: 140, width: '100%'}}
+            />
+             <Image
+              source={eventData.coupon2}
+              resizeMode="stretch"
+              style={{height: 140, width: '100%'}}
+            />
+            <TouchableOpacity style={styles.button}
+             onPress={() => handlePress(mainData.logState)}>
+              <Text style={styles.buttonText}>쿠폰 다운로드</Text>
+            </TouchableOpacity>
+
+          </View>
+        </VStack>
             <HStack style={{backgroundColor: 'black'}}>
               <View style={styles.circle} />
               <View style={styles.profile}>

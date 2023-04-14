@@ -89,16 +89,23 @@ const MyTaste: React.FC = () => {
   };
 
 
-  const storeData = async (updateInfo) => {
+  const storeData = (updateInfo) => {
     try {
       const jsonValue = JSON.stringify(updateInfo);
-      await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
-      console.log('업데이트 완료:' + jsonValue);
-      // navigation.navigate('Mypage');
+      AsyncStorage.setItem(STORAGE_KEY, jsonValue, () => {
+        console.log('쿠폰 업데이트 완료:' + jsonValue);
+        Alert.alert(
+          '팔로우를 시작합니다', // 첫번째 text: 타이틀 제목
+          [
+            {text: '네', onPress: () => console.log('그렇다는데')}, //버튼 제목
+            // 이벤트 발생시 로그를 찍는다
+          ],
+          {cancelable: false},
+        );
+      });
     } catch (error) {
       console.log(error);
     }
-
   };
 
 

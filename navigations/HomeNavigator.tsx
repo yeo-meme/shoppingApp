@@ -99,7 +99,7 @@ function HomeTabs() {
       />
 
       {/* mypage */}
-      {isAuthenticated && isFocused && (
+      {/* {isAuthenticated && isFocused && (
         <Tab.Screen
           name="Mypage"
           component={Mypage}
@@ -110,7 +110,7 @@ function HomeTabs() {
             ),
           }}
         />
-      )}
+      )} */}
 
       {/* 5: mypage */}
       {/* <Tab.Screen name="Mypage" component={Mypage} /> */}

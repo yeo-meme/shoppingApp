@@ -21,20 +21,6 @@ import {ScrollView} from 'react-native-gesture-handler';
 import { color } from 'native-base/lib/typescript/theme/styled-system';
 import { COLORS } from '../constants';
 
-// const DATA = [
-//   {
-//     id: 1,
-//     title: 'First Item',
-//   },
-//   {
-//     id: 2,
-//     title: 'Second Item',
-//   },
-//   {
-//     id: 3,
-//     title: 'Third Item',
-//   },
-// ];
 
 
 const STORAGE_KEY = 'members';
@@ -144,7 +130,6 @@ const [mainData, setMainData] = useState({
       const jsonValue = JSON.stringify(updateInfo);
       AsyncStorage.setItem(STORAGE_KEY, jsonValue, () => {
         console.log('쿠폰 업데이트 완료:' + jsonValue);
-        // navigation.navigate('Mypage');
         Alert.alert(
           '쿠폰이 지급되었습니다', // 첫번째 text: 타이틀 제목
           [
@@ -159,16 +144,6 @@ const [mainData, setMainData] = useState({
     }
   };
 
-  // const storeData = async (updateInfo) => {
-  //   try {
-  //     const jsonValue = JSON.stringify(updateInfo);
-  //     await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
-  //     console.log('쿠폰 업데이트 완료:' + jsonValue);
-  //     // navigation.navigate('Mypage');
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
 
 
@@ -206,10 +181,6 @@ const [mainData, setMainData] = useState({
   return (
     <ScrollView>
       <Box>
-        {/* <Heading fontSize="xl" p="4" pb="3">
-          2023 럭셔리 트렌드 스타일을 {'\n'}둘러 보세요
-        </Heading> */}
-
         <VStack>
           <Image
             source={eventData.event_banner}
@@ -258,7 +229,6 @@ const [mainData, setMainData] = useState({
                   size="60px"
                   source={{
                     uri: item.avatarUrl,
-                    // item.avatarUrl
                   }}
                 />
 
