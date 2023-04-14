@@ -42,7 +42,7 @@ function HomeTabs() {
       {/* bottom navi */}
 
       {/* 1: home  */}
-      {/* <Tab.Screen
+      <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -55,7 +55,7 @@ function HomeTabs() {
             />
           ),
         }}
-      />  */}
+      /> 
 
       {/* 2: category */}
       <Tab.Screen
@@ -77,7 +77,7 @@ function HomeTabs() {
         options={{
           tabBarLabel: '내취향',
           tabBarIcon: ({color, size}) => (
-            <MaterialCommunityIcons name="history" color={color} size={size} />
+            <MaterialCommunityIcons name="account-alert" color={color} size={size} />
           ),
         }}
       />
