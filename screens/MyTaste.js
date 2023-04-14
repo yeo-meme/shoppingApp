@@ -10,6 +10,7 @@ import {
   FlatList,
   FlatListProps,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   Input,
@@ -35,9 +36,9 @@ import {ScrollView} from 'react-native-gesture-handler';
 import allSnapInfo from '../src/data/SnapData';
 import snapImage from '../constants/snap_image';
 import {MaterialBottomTabView} from '@react-navigation/material-bottom-tabs';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const STORAGE_KEY = 'members';
-
 
 const MyTaste: React.FC = () => {
   const navigation = useNavigation();
@@ -48,10 +49,9 @@ const MyTaste: React.FC = () => {
     email: '',
     recommendId: '',
     logState: false,
-    follow: '',
-    coupon: '',
+    follow: 0,
+    coupon: 0,
   });
-
 
   useEffect(() => {
     const getData = async () => {
@@ -62,22 +62,45 @@ const MyTaste: React.FC = () => {
           console.log('내취향 어씽크 가져온값:', JSON.parse(value));
         }
       } catch (error) {
-        console.log('로그인 first 불러오기' + error);
+        console.log('내취향 first 불러오기' + error);
       }
     };
     getData();
   }, []);
 
-
-
-
-  const handlePress = () => {
-
-    const updateInfo = {...mainData, coupon: mainData.coupon+1};
-    setMainData(updateInfo);
-         console.log("증가 팔로우:" ,mainData.coupon);
-      console.log("전제 팔로우:" ,mainData);
+  const handlePress = (item, index, loninState) => {
+    console.log('바로위에서:', loninState);
+    if (loninState == true) {
+      const updateInfo = {...mainData, coupon: mainData.coupon+1};
+      setMainData(updateInfo);
+      console.log('증가 팔로우:', mainData.coupon);
+      console.log('전제 팔로우:', mainData);
+      storeData(updateInfo);
+    } else {
+      Alert.alert(
+        '로그인후 이용해주세요', // 첫번째 text: 타이틀 제목
+        [
+          {text: '네', onPress: () => console.log('그렇다는데')}, //버튼 제목
+          // 이벤트 발생시 로그를 찍는다
+        ],
+        {cancelable: false},
+      );
+    }
   };
+
+
+  const storeData = async (updateInfo) => {
+    try {
+      const jsonValue = JSON.stringify(updateInfo);
+      await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
+      console.log('업데이트 완료:' + jsonValue);
+      // navigation.navigate('Mypage');
+    } catch (error) {
+      console.log(error);
+    }
+    
+  };
+
 
   function renderProductList(item, index) {
     return (
@@ -169,7 +192,6 @@ const MyTaste: React.FC = () => {
         pl={['0', '4']}
         pr={['0', '5']}
         py="2">
-      
         <HStack
           space={[2, 3]}
           justifyContent="space-between"
@@ -201,7 +223,7 @@ const MyTaste: React.FC = () => {
           <Spacer />
           <TouchableOpacity
             style={styles.button}
-            onPress={()=> handlePress(item,index)}>
+            onPress={() => handlePress(item, index,mainData.logState)}>
             <Text style={styles.buttonText}>팔로우</Text>
           </TouchableOpacity>
         </HStack>
@@ -213,7 +235,7 @@ const MyTaste: React.FC = () => {
             <MaterialCommunityIcons name="heart-multiple-outline" size={35} />
           </TouchableOpacity>
         </View>
-        </Box>
+      </Box>
     );
   }
 

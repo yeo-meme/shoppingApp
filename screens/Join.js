@@ -24,8 +24,8 @@ const Join = () => {
     email: string,
     recommendId: string,
     logState: Boolean,
-    follow: string,
-    coupon: string,
+    follow: number,
+    coupon: number,
   };
 
   //타입의 객체
@@ -35,17 +35,17 @@ const Join = () => {
     email: '',
     recommendId: '',
     logState: false,
-    follow: '',
-    coupon: '',
+    follow: 0,
+    coupon: 0,
   });
 
-  const saveData = async () => {
-    try {
-      await AsyncStorage.setItem(id, formValues);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const saveData = async () => {
+  //   try {
+  //     await AsyncStorage.setItem(id, formValues);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const setMemberData = async () => {
     try {

@@ -24,8 +24,8 @@ const Mypage = () => {
     email: '',
     recommendId: '',
     logState: false,
-    follow: '',
-    coupon: '',
+    follow: 0,
+    coupon: 0,
   });
 
   useEffect(() => {

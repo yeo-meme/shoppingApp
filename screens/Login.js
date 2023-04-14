@@ -43,8 +43,8 @@ const Login = () => {
     email: string,
     recommendId: string,
     logState: Boolean,
-    follow: string,
-    coupon: string,
+    follow: number,
+    coupon: number,
   };
 
   type UserValue = {
@@ -58,8 +58,8 @@ const Login = () => {
     email: '',
     recommendId: '',
     logState: false,
-    follow: '',
-    coupon: '',
+    follow: 0,
+    coupon: 0,
   });
 
   const [loginValues, setLoginValues] = useState({
@@ -89,7 +89,7 @@ const Login = () => {
     getData();
   }, []);
 
-  const storeData = async updateInfo => {
+  const storeData = async (updateInfo) => {
     try {
       const jsonValue = JSON.stringify(updateInfo);
       await AsyncStorage.setItem(STORAGE_KEY, jsonValue);

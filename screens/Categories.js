@@ -16,7 +16,7 @@ import {
 } from 'native-base';
 import {useFocusEffect} from '@react-navigation/native';
 import eventData from '../constants/event_image';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {ScrollView} from 'react-native-gesture-handler';
 import { color } from 'native-base/lib/typescript/theme/styled-system';
 import { COLORS } from '../constants';
