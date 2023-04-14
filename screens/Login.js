@@ -30,6 +30,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import AuthNavigator from '../navigations/AuthNavigator';
 import HomeNavigator from '../navigations/HomeNavigator';
 import MypageNavigator from '../navigations/MyPageNavigator';
+import { grey200 } from 'react-native-paper/lib/typescript/src/styles/themes/v2/colors';
 
 const STORAGE_KEY = 'members';
 
@@ -137,22 +138,15 @@ const Login = () => {
       {mainData.logState == true ? (
         <View style={styles.container}>
           <View>
-            <HStack style={{backgroundColor: 'black', height: 150}}>
-              <View style={styles.circle} />
-              <View style={styles.profile}>
-                <Text>{mainData.id}</Text>
-              </View>
-            </HStack>
-          </View>
-          <View>
             {/* 프로필 */}
+            <View style={{ borderColor: 'black',borderWidth: 1, borderRadius: 10, padding: 10}}>
             <HStack
               space={[2, 3]}
               justifyContent="space-between"
               marginBottom={3}
               marginTop={5}>
               <Avatar
-                size="35px"
+                size="60px"
                 source={
                   {
                     // uri: item.proimg,
@@ -160,6 +154,7 @@ const Login = () => {
                 }
               />
               <VStack space={1}>
+                <View>
                 <Text
                   _dark={{
                     color: 'warmGray.50',
@@ -175,6 +170,7 @@ const Login = () => {
                   }}>
                   {/* {item.brand_name} */}
                 </Text>
+                </View>
               </VStack>
               <Spacer />
               <View>
@@ -185,88 +181,91 @@ const Login = () => {
                 </TouchableOpacity>
               </View>
             </HStack>
+            </View>
 
             {/* 팔로우 */}
-            <HStack
+            <VStack
               space={[2, 3]}
               justifyContent="space-between"
               marginBottom={3}
               marginTop={5}>
-              <Avatar
-                size="35px"
-                source={
-                  {
-                    // uri: item.proimg,
-                  }
-                }
-              />
-              <VStack space={1}>
-                <Text
-                  _dark={{
-                    color: 'warmGray.50',
-                  }}
-                  color="coolGray.800"
-                  bold>
-                팔로우
-                </Text>
-                <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: 'warmGray.200',
-                  }}>
-                    {mainData.follow}
-                </Text>
-              </VStack>
-              <Spacer />
-              <View>
-                <TouchableOpacity
-                  style={styles.button_logout}
-                  >
-                  <Text>관리</Text>
-                </TouchableOpacity>
-              </View>
-            </HStack>
+              <Box alignItems="center" style={{backgroundColor: '#EAEAEA', borderRadius: 10,padding :10,}} >
+                <VStack space={2} alignItems="center">
+                  <Avatar
+                    size="35px"
+                    source={
+                      {
+                        // uri: item.proimg,
+                      }
+                    }
+                  />
 
-             {/* 쿠폰 */}
-             <HStack
+                  <Text
+                    _dark={{
+                      color: 'warmGray.50',
+                    }}
+                    color="coolGray.800"
+                    bold>
+                    팔로우
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: 'warmGray.200',
+                    }}>
+                    {mainData.follow}
+                  </Text>
+                </VStack>
+              </Box>
+              <Spacer />
+              <View>
+                <TouchableOpacity style={styles.button_logout}>
+                  <Text>관리</Text>
+                </TouchableOpacity>
+              </View>
+            </VStack>
+
+            {/* 쿠폰 */}
+            <VStack
               space={[2, 3]}
               justifyContent="space-between"
               marginBottom={3}
               marginTop={5}>
-              <Avatar
-                size="35px"
-                source={
-                  {
-                    // uri: item.proimg,
-                  }
-                }
-              />
-              <VStack space={1}>
-                <Text
-                  _dark={{
-                    color: 'warmGray.50',
-                  }}
-                  color="coolGray.800"
-                  bold>
-                쿠폰
-                </Text>
-                <Text
-                  color="coolGray.600"
-                  _dark={{
-                    color: 'warmGray.200',
-                  }}>
+              <Box alignItems="center"  style={{backgroundColor: '#EAEAEA', borderRadius: 10,padding :10,}} >
+                <VStack space={2} alignItems="center">
+                  <Avatar
+                    size="35px"
+                    source={
+                      {
+                        // uri: item.proimg,
+                      }
+                    }
+                  />
+                  <Text
+                    _dark={{
+                      color: 'warmGray.50',
+                    }}
+                    color="coolGray.800"
+                    bold>
+                    쿠폰
+                  </Text>
+                  <Text
+                    color="coolGray.600"
+                    _dark={{
+                      color: 'warmGray.200',
+                    }}>
                     {mainData.coupon}
-                </Text>
-              </VStack>
+                  </Text>
+                </VStack>
+              </Box>
+
               <Spacer />
               <View>
-                <TouchableOpacity
-                  style={styles.button_logout}
-                  >
+                <TouchableOpacity style={styles.button_logout}>
                   <Text>관리</Text>
                 </TouchableOpacity>
               </View>
-            </HStack>
+            </VStack>
           </View>
         </View>
       ) : (
@@ -329,6 +328,7 @@ const styles = StyleSheet.create({
   container: {
     paddingBottom: 10,
     paddingTop: 20,
+    paddingHorizontal: 20,
   },
   submitBtn: {
     paddingTop: 40,
