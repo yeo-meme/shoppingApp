@@ -71,9 +71,9 @@ const MyTaste: React.FC = () => {
   const handlePress = (item, index, loninState) => {
     console.log('바로위에서:', loninState);
     if (loninState == true) {
-      const updateInfo = {...mainData, coupon: mainData.coupon+1};
+      const updateInfo = {...mainData, follow: mainData.follow+1};
       setMainData(updateInfo);
-      console.log('증가 팔로우:', mainData.coupon);
+      console.log('증가 팔로우:', mainData.follow);
       console.log('전제 팔로우:', mainData);
       storeData(updateInfo);
     } else {
@@ -98,7 +98,7 @@ const MyTaste: React.FC = () => {
     } catch (error) {
       console.log(error);
     }
-    
+
   };
 
 

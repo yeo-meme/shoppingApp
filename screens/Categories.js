@@ -1,7 +1,7 @@
 /* eslint-disable react-native/no-inline-styles */
-import React, {useEffect, useLayoutEffect} from 'react';
+import React, {useEffect, useLayoutEffect, useState} from 'react';
 import {Image} from 'native-base';
-import {StyleSheet, View, Text, FlatList, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text, FlatList, TouchableOpacity,Alert} from 'react-native';
 import {
   Input,
   Heading,
@@ -21,29 +21,31 @@ import {ScrollView} from 'react-native-gesture-handler';
 import { color } from 'native-base/lib/typescript/theme/styled-system';
 import { COLORS } from '../constants';
 
-const DATA = [
-  {
-    id: 1,
-    title: 'First Item',
-  },
-  {
-    id: 2,
-    title: 'Second Item',
-  },
-  {
-    id: 3,
-    title: 'Third Item',
-  },
-];
+// const DATA = [
+//   {
+//     id: 1,
+//     title: 'First Item',
+//   },
+//   {
+//     id: 2,
+//     title: 'Second Item',
+//   },
+//   {
+//     id: 3,
+//     title: 'Third Item',
+//   },
+// ];
 
 
-const STORAGE_KEY = 'settings';
+const STORAGE_KEY = 'members';
 
 const Item = ({title}: any) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
   </View>
 );
+
+
 
 const data = [
   {
@@ -90,13 +92,24 @@ const data = [
 
 const Category = ({navigation}) => {
 
+const [mainData, setMainData] = useState({
+  id: '',
+  password: '',
+  email: '',
+  recommendId: '',
+  logState: false,
+  follow: 0,
+  coupon: 0,
+});
+
+
   useEffect(() => {
     const getData = async () => {
       try {
         const value = await AsyncStorage.getItem(STORAGE_KEY);
         if (value !== null) {
           setMainData(JSON.parse(value));
-          console.log('my page 어씽크 가져온값:', JSON.parse(value));
+          console.log('이벤트 어씽크 가져온값:', JSON.parse(value));
         }
       } catch (error) {
         console.log('불러오기' + error);
@@ -105,13 +118,57 @@ const Category = ({navigation}) => {
     getData();
   }, []);
 
-  // useEffect(() => {
-  //   navigation.setOptions({
-  //     title: `이벤트요정`,
-  //   });
-  // }, [navigation]);
+  const handlePress = (loninState) => {
+    console.log('쿠폰 바로위에서:', loninState);
+    if (loninState == true) {
+      const updateInfo = {...mainData, coupon: mainData.coupon+1};
+      setMainData(updateInfo);
+      console.log('쿠폰 증가 팔로우:', mainData.coupon);
+      console.log('쿠폰 전제 팔로우:', mainData);
+      storeData(updateInfo);
+    } else {
+      Alert.alert(
+        '로그인후 이용해주세요', // 첫번째 text: 타이틀 제목
+        [
+          {text: '네', onPress: () => console.log('그렇다는데')}, //버튼 제목
+          // 이벤트 발생시 로그를 찍는다
+        ],
+        {cancelable: false},
+      );
+    }
+  };
 
-  // const renderItem = ({item}: any) => <Item title={item.title} />;
+
+  const storeData = (updateInfo) => {
+    try {
+      const jsonValue = JSON.stringify(updateInfo);
+      AsyncStorage.setItem(STORAGE_KEY, jsonValue, () => {
+        console.log('쿠폰 업데이트 완료:' + jsonValue);
+        // navigation.navigate('Mypage');
+        Alert.alert(
+          '쿠폰이 지급되었습니다', // 첫번째 text: 타이틀 제목
+          [
+            {text: '네', onPress: () => console.log('그렇다는데')}, //버튼 제목
+            // 이벤트 발생시 로그를 찍는다
+          ],
+          {cancelable: false},
+        );
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // const storeData = async (updateInfo) => {
+  //   try {
+  //     const jsonValue = JSON.stringify(updateInfo);
+  //     await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
+  //     console.log('쿠폰 업데이트 완료:' + jsonValue);
+  //     // navigation.navigate('Mypage');
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
 
 
@@ -176,7 +233,8 @@ const Category = ({navigation}) => {
               resizeMode="stretch"
               style={{height: 140, width: '100%'}}
             />
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button}
+             onPress={() => handlePress(mainData.logState)}>
               <Text style={styles.buttonText}>쿠폰 다운로드</Text>
             </TouchableOpacity>
 
