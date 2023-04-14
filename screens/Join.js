@@ -23,7 +23,9 @@ const Join = () => {
     password: string,
     email: string,
     recommendId: string,
-    logState: Boolean
+    logState: Boolean,
+    follow: string,
+    coupon: string,
   };
 
   //타입의 객체
@@ -33,6 +35,8 @@ const Join = () => {
     email: '',
     recommendId: '',
     logState: false,
+    follow: '',
+    coupon: '',
   });
 
   const saveData = async () => {
@@ -74,7 +78,6 @@ const Join = () => {
         <Input
           placeholder="숫자,영문,특수문자 조합 최소8자"
           height={12}
-          //   secureTextEntry
           marginBottom={3}
           autoCapitalize="none"
           onChangeText={text => setFormValues({...formValues, password: text})}

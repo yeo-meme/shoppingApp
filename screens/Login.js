@@ -17,6 +17,7 @@ import {
   Center,
   NativeBaseProvider,
   VStack,
+  HStack,
 } from 'native-base';
 import {useNavigation} from '@react-navigation/native';
 import {COLORS} from '../constants';
@@ -42,6 +43,8 @@ const Login = () => {
     email: string,
     recommendId: string,
     logState: Boolean,
+    follow: string,
+    coupon: string,
   };
 
   type UserValue = {
@@ -55,6 +58,8 @@ const Login = () => {
     email: '',
     recommendId: '',
     logState: false,
+    follow: '',
+    coupon: '',
   });
 
   const [loginValues, setLoginValues] = useState({
@@ -75,7 +80,7 @@ const Login = () => {
         const value = await AsyncStorage.getItem(STORAGE_KEY);
         if (value !== null) {
           setMainData(JSON.parse(value));
-          console.log('login first 어씽크 가져온값:', JSON.parse(value));
+          console.log('login first 어씽크 가져온값:', JSON.stringify(mainData));
         }
       } catch (error) {
         console.log('로그인 first 불러오기' + error);
@@ -84,7 +89,7 @@ const Login = () => {
     getData();
   }, []);
 
-  const storeData = async (updateInfo) => {
+  const storeData = async updateInfo => {
     try {
       const jsonValue = JSON.stringify(updateInfo);
       await AsyncStorage.setItem(STORAGE_KEY, jsonValue);
@@ -102,7 +107,7 @@ const Login = () => {
       mainData.id === loginValues.id &&
       mainData.password === loginValues.password
     ) {
-      const updateInfo = {...mainData, logState: 'true'};
+      const updateInfo = {...mainData, logState: true};
       setMainData(updateInfo);
 
       console.log('true 변경후 :', updateInfo);
@@ -113,10 +118,49 @@ const Login = () => {
     }
   };
 
+  const logoutState = () => {
+    const updateInfo = {...mainData, logState: false};
+    setMainData(updateInfo);
+
+    console.log('true 변경후 :', updateInfo);
+
+    storeData(updateInfo);
+
+    navigation.replace('HomeTabs');
+  };
+
+  console.log('mainData. : ' + mainData.logState);
   return (
     <View style={{height: '100%', width: '100%', backgroundColor: '#ffffff'}}>
-      {mainData.logState ? (
-        <MypageNavigator />
+      {mainData.logState == true ? (
+        <View style={styles.container}>
+          <View>
+            <HStack style={{backgroundColor: 'black', height: 150}}>
+              <View style={styles.circle} />
+              <View style={styles.profile}>
+                <Text>{mainData.id}</Text>
+              </View>
+
+              <View>
+                <TouchableOpacity
+                  style={styles.button_logout}
+                  onPress={logoutState}>
+                  <Text>로그아웃</Text>
+                </TouchableOpacity>
+              </View>
+            </HStack>
+          </View>
+          <View>
+            <HStack>
+              <Text>사용가능한 쿠폰:</Text>
+              <Text>3개</Text>
+            </HStack>
+            <HStack>
+              <Text>팔로우:</Text>
+              <Text>3개</Text>
+            </HStack>
+          </View>
+        </View>
       ) : (
         <View>
           <ScrollView>
@@ -208,6 +252,21 @@ const styles = StyleSheet.create({
     height: 50,
     borderColor: COLORS.black,
     padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  buttonText_logout: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  button_logout: {
+    backgroundColor: 'white',
+    borderRadius: 5,
+    borderWidth: 1,
+    marginBottom: 10,
+    height: 30,
+    borderColor: COLORS.black,
+    padding: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },

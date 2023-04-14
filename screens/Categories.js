@@ -36,6 +36,9 @@ const DATA = [
   },
 ];
 
+
+const STORAGE_KEY = 'settings';
+
 const Item = ({title}: any) => (
   <View style={styles.item}>
     <Text style={styles.title}>{title}</Text>
@@ -86,13 +89,31 @@ const data = [
 ];
 
 const Category = ({navigation}) => {
-  useEffect(() => {
-    navigation.setOptions({
-      title: `이벤트요정`,
-    });
-  }, [navigation]);
 
-  const renderItem = ({item}: any) => <Item title={item.title} />;
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem(STORAGE_KEY);
+        if (value !== null) {
+          setMainData(JSON.parse(value));
+          console.log('my page 어씽크 가져온값:', JSON.parse(value));
+        }
+      } catch (error) {
+        console.log('불러오기' + error);
+      }
+    };
+    getData();
+  }, []);
+
+  // useEffect(() => {
+  //   navigation.setOptions({
+  //     title: `이벤트요정`,
+  //   });
+  // }, [navigation]);
+
+  // const renderItem = ({item}: any) => <Item title={item.title} />;
+
+
 
   function renderCategoryList() {
     return (
@@ -156,7 +177,7 @@ const Category = ({navigation}) => {
               style={{height: 140, width: '100%'}}
             />
             <TouchableOpacity style={styles.button}>
-              <Text style={styles.buttonText}>자세히 보기</Text>
+              <Text style={styles.buttonText}>쿠폰 다운로드</Text>
             </TouchableOpacity>
 
           </View>

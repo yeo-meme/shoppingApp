@@ -36,15 +36,48 @@ import allSnapInfo from '../src/data/SnapData';
 import snapImage from '../constants/snap_image';
 import {MaterialBottomTabView} from '@react-navigation/material-bottom-tabs';
 
+const STORAGE_KEY = 'members';
+
+
 const MyTaste: React.FC = () => {
   const navigation = useNavigation();
-  // const [product_list, setProductList] = useState<ProductType[]>(ProductsDummyData);
+  const [isPressed, setIsPressed] = useState(false);
+  const [mainData, setMainData] = useState({
+    id: '',
+    password: '',
+    email: '',
+    recommendId: '',
+    logState: false,
+    follow: '',
+    coupon: '',
+  });
+
 
   useEffect(() => {
-    navigation.setOptions({
-      title: `브랜드별 카테고리`,
-    });
-  }, [navigation]);
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem(STORAGE_KEY);
+        if (value !== null) {
+          setMainData(JSON.parse(value));
+          console.log('내취향 어씽크 가져온값:', JSON.parse(value));
+        }
+      } catch (error) {
+        console.log('로그인 first 불러오기' + error);
+      }
+    };
+    getData();
+  }, []);
+
+
+
+
+  const handlePress = () => {
+
+    const updateInfo = {...mainData, coupon: mainData.coupon+1};
+    setMainData(updateInfo);
+         console.log("증가 팔로우:" ,mainData.coupon);
+      console.log("전제 팔로우:" ,mainData);
+  };
 
   function renderProductList(item, index) {
     return (
@@ -126,6 +159,64 @@ const MyTaste: React.FC = () => {
     );
   }
 
+  function renderView(item, index) {
+    return (
+      <Box
+        _dark={{
+          borderColor: 'muted.50',
+        }}
+        borderColor="muted.800"
+        pl={['0', '4']}
+        pr={['0', '5']}
+        py="2">
+      
+        <HStack
+          space={[2, 3]}
+          justifyContent="space-between"
+          marginBottom={3}
+          marginTop={5}>
+          <Avatar
+            size="35px"
+            source={{
+              uri: item.proimg,
+            }}
+          />
+          <VStack space={1}>
+            <Text
+              _dark={{
+                color: 'warmGray.50',
+              }}
+              color="coolGray.800"
+              bold>
+              {item.name}
+            </Text>
+            <Text
+              color="coolGray.600"
+              _dark={{
+                color: 'warmGray.200',
+              }}>
+              {item.brand_name}
+            </Text>
+          </VStack>
+          <Spacer />
+          <TouchableOpacity
+            style={styles.button}
+            onPress={()=> handlePress(item,index)}>
+            <Text style={styles.buttonText}>팔로우</Text>
+          </TouchableOpacity>
+        </HStack>
+
+        <View style={styles.likeit_container}>
+          <Image source={item.img} style={styles.image} />
+
+          <TouchableOpacity style={styles.heartIconContainer}>
+            <MaterialCommunityIcons name="heart-multiple-outline" size={35} />
+          </TouchableOpacity>
+        </View>
+        </Box>
+    );
+  }
+
   return (
     <View>
       <Heading fontSize="xl" pl="17px" pt="20px">
@@ -134,61 +225,65 @@ const MyTaste: React.FC = () => {
 
       <FlatList
         data={allSnapInfo}
-        renderItem={({item}) => (
-          <Box
-            _dark={{
-              borderColor: 'muted.50',
-            }}
-            borderColor="muted.800"
-            pl={['0', '4']}
-            pr={['0', '5']}
-            py="2">
-              <HStack
-                space={[2, 3]}
-                justifyContent="space-between"
-                marginBottom={3}
-                marginTop={5}>
-                <Avatar
-                  size="35px"
-                  source={{
-                    uri: item.proimg,
-                  }}
-                />
+        renderItem={
+          ({item, index}: {item: newData, index: number}) =>
+            renderView(item, index)
+          // <Box
+          //   _dark={{
+          //     borderColor: 'muted.50',
+          //   }}
+          //   borderColor="muted.800"
+          //   pl={['0', '4']}
+          //   pr={['0', '5']}
+          //   py="2">
+          //     <HStack
+          //       space={[2, 3]}
+          //       justifyContent="space-between"
+          //       marginBottom={3}
+          //       marginTop={5}>
+          //       <Avatar
+          //         size="35px"
+          //         source={{
+          //           uri: item.proimg,
+          //         }}
+          //       />
 
-                <VStack space={1}>
-                  <Text
-                    _dark={{
-                      color: 'warmGray.50',
-                    }}
-                    color="coolGray.800"
-                    bold>
-                    {item.name}
-                  </Text>
-                  <Text
-                    color="coolGray.600"
-                    _dark={{
-                      color: 'warmGray.200',
-                    }}>
-                    {item.brand_name}
-                  </Text>
-                </VStack>
-                <Spacer />
-                <TouchableOpacity style={styles.button}>
-                  <Text style={styles.buttonText}>팔로우</Text>
-                </TouchableOpacity>
-              </HStack>
-            <View style={styles.likeit_container}>
-                <Image source={item.img} style={styles.image} />
+          //       <VStack space={1}>
+          //         <Text
+          //           _dark={{
+          //             color: 'warmGray.50',
+          //           }}
+          //           color="coolGray.800"
+          //           bold>
+          //           {item.name}
+          //         </Text>
+          //         <Text
+          //           color="coolGray.600"
+          //           _dark={{
+          //             color: 'warmGray.200',
+          //           }}>
+          //           {item.brand_name}
+          //         </Text>
+          //       </VStack>
+          //       <Spacer />
+          //       <TouchableOpacity style={[styles.button,
+          //       isPressed ? styles.buttonPressed : styles.buttonNotPressed,]}
+          //       onPress={handlePress}>
+          //         <Text style={styles.buttonText}>팔로우</Text>
+          //       </TouchableOpacity>
+          //     </HStack>
+          //   <View style={styles.likeit_container}>
+          //       <Image source={item.img} style={styles.image} />
 
-                <TouchableOpacity style={styles.heartIconContainer}>
-                  <MaterialCommunityIcons
-                    name="heart-multiple-outline"
-                    size={35}
-                  />
-                </TouchableOpacity>
-            </View>
-          </Box>
-        )}
+          //       <TouchableOpacity style={styles.heartIconContainer}>
+          //         <MaterialCommunityIcons
+          //           name="heart-multiple-outline"
+          //           size={35}
+          //         />
+          //       </TouchableOpacity>
+          //   </View>
+          // </Box>
+        }
         keyExtractor={item => item.id}
       />
     </View>
@@ -234,6 +329,12 @@ const styles = StyleSheet.create({
     bottom: 0,
     backgroundColor: 'transparent',
     padding: 15,
+  },
+  buttonNotPressed: {
+    backgroundColor: 'white',
+  },
+  buttonPressed: {
+    backgroundColor: 'blue',
   },
 });
 
