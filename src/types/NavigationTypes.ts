@@ -7,7 +7,7 @@ export type AppDrawerParamList = {
   Address: AddressStackParamList;
   Categories: MenuAndProductListStackParamList;
   HomePage: HomeStackParamList;
-  Login: LoginStackParamList;
+  Mypage: LoginStackParamList;
   ProductList: MenuAndProductListStackParamList;
 };
 
@@ -17,6 +17,7 @@ export type HomeBottomtabParamList = {
   category: undefined;
   Home: undefined;
   MyBag: undefined;
+  Mypage: undefined;
 };
 
 export type HomeStackParamList = {
@@ -28,10 +29,11 @@ export type HomeStackParamList = {
   Splashscreen: undefined;
   Detail: undefined;
   Join: undefined;
+  Mypage: undefined;
 };
 
 export type LoginStackParamList = {
-  Login: undefined;
+  Mypage: undefined;
 };
 
 export type MenuAndProductListStackParamList = {

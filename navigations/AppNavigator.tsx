@@ -10,6 +10,7 @@ import { TouchableOpacity } from 'react-native';
 import MenuNavigator from './MenuNavigator';
 // import AddressNavigator from './AddressNavigator';
 import ProductListNavigator from './ProductListnavigator';
+import MypageNavigator from './MypageNavigator';
 
 
 const Drawer = createDrawerNavigator<AppDrawerParamList>();
@@ -25,11 +26,11 @@ export default function AppNavigator() {
           }}
           component={HomeNavigator}
         />
-        {/* <Drawer.Screen
-          name="Address"
-          options={{drawerLabel: 'Address'}}
-          component={AddressNavigator}
-        /> */}
+        <Drawer.Screen
+          name="Mypage"
+          options={{drawerLabel: 'Mypage'}}
+          component={MypageNavigator}
+        />
          {/* <Drawer.Screen
          name="Login"
            options={{drawerLabel: 'Login'}}

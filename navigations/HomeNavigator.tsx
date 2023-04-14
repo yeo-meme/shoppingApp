@@ -14,31 +14,33 @@ import {Image, Text, View} from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {SIZES} from '../constants/theme';
 import icons from '../constants/icons';
-// import Ionicons from 'react-native-vector-icons/Ionicons';
+import {useIsFocused} from '@react-navigation/native';
 
 // screens
 import Category from '../screens/Categories';
 import Home from '../screens/Home';
-// import ProductList from '../screens/ProductList';
 import Cart from '../screens/Cart';
 import Detail from '../screens/Detail';
-import MyPage from '../screens/Mypage';
+import Login from '../screens/Login';
 import MyTaste from '../screens/MyTaste';
 import Join from '../screens/Join';
-// import {Icon} from 'native-base';
+import Mypage from '../screens/Mypage';
 
 const Tab = createBottomTabNavigator<HomeBottomtabParamList>();
 const Stack = createStackNavigator<HomeStackParamList>();
 
+const isAuthenticated: boolean = true;
 
 // Bottom Sheet Menu
 function HomeTabs() {
+  const isFocused = useIsFocused();
+
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
       {/* bottom navi */}
 
       {/* 1: home  */}
-        {/* <Tab.Screen
+      {/* <Tab.Screen
         name="Home"
         component={Home}
         options={{
@@ -80,7 +82,7 @@ function HomeTabs() {
       {/* 4: Account */}
       <Tab.Screen
         name="Account"
-        component={MyPage}
+        component={Login}
         options={{
           tabBarLabel: '마이페이지',
           tabBarIcon: ({color, size}) => (
@@ -93,6 +95,24 @@ function HomeTabs() {
         }}
       />
 
+      {/* mypage */}
+      {isAuthenticated && isFocused && (
+        <Tab.Screen
+          name="Mypage"
+          component={Mypage}
+          options={{
+            tabBarLabel: 'Mypage',
+            tabBarIcon: ({color, size}) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+      )}
+
+      {/* 5: mypage */}
+      {/* <Tab.Screen name="Mypage" component={Mypage} /> */}
+
+      {/* <Tab.Screen name="Mypage" component={Mypage} /> */}
       {/* 5: MyBag */}
       {/* <Tab.Screen
         name="MyBag"
@@ -144,6 +164,7 @@ export default function HomeNavigator() {
       <Stack.Screen name="Cart" component={Cart} />
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="Join" component={Join} />
+      <Stack.Screen name="Mypage" component={Mypage} />
     </Stack.Navigator>
   );
 }
