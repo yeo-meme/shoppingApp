@@ -30,6 +30,7 @@ export type HomeStackParamList = {
   Detail: undefined;
   Join: undefined;
   Mypage: undefined;
+  HomeTabs:undefined;
 };
 
 export type LoginStackParamList = {

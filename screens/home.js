@@ -276,7 +276,7 @@ const Home = () => {
 
   return (
     <View>
-      <ScrollView>
+      {/* <ScrollView> */}
         {/* 최상위View */}
         <View style={styles.container}>
           {/* 1번째 리스트 : 신발 */}
@@ -367,7 +367,7 @@ const Home = () => {
             </View>
           </View>
         </View>
-      </ScrollView>
+      {/* </ScrollView> */}
     </View>
   );
 };

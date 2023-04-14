@@ -14,7 +14,6 @@ import {Box, HStack, Avatar, VStack, Heading, Input} from 'native-base';
 import {COLORS} from '../constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
 const STORAGE_KEY = 'members';
 // const STORAGE_KEY = '@my_app_key';
 
@@ -24,6 +23,7 @@ const Join = () => {
     password: string,
     email: string,
     recommendId: string,
+    logState: Boolean
   };
 
   //타입의 객체
@@ -32,6 +32,7 @@ const Join = () => {
     password: '',
     email: '',
     recommendId: '',
+    logState: false,
   });
 
   const saveData = async () => {
@@ -42,12 +43,9 @@ const Join = () => {
     }
   };
 
-
- 
-
   const setMemberData = async () => {
     try {
-        const jsonFormValues = JSON.stringify(formValues);
+      const jsonFormValues = JSON.stringify(formValues);
       await AsyncStorage.setItem(STORAGE_KEY, jsonFormValues);
       console.log('formValues:', jsonFormValues);
     } catch (error) {
@@ -64,7 +62,7 @@ const Join = () => {
         <Input
           placeholder="영문,숫자 5-11자"
           height={12}
-          autoCapitalize='none'
+          autoCapitalize="none"
           onChangeText={text => setFormValues({...formValues, id: text})}
           value={formValues.id}
         />
@@ -76,15 +74,17 @@ const Join = () => {
         <Input
           placeholder="숫자,영문,특수문자 조합 최소8자"
           height={12}
-        //   secureTextEntry
+          //   secureTextEntry
           marginBottom={3}
-          autoCapitalize='none'
+          autoCapitalize="none"
           onChangeText={text => setFormValues({...formValues, password: text})}
           value={formValues.password}
         />
-        <Input placeholder="비밀번호 재입력" 
-        autoCapitalize='none'
-        height={12} />
+        <Input
+          placeholder="비밀번호 재입력"
+          autoCapitalize="none"
+          height={12}
+        />
       </View>
       <View style={styles.formSpacer}>
         <Heading fontSize="sm" marginBottom={2}>
@@ -92,7 +92,7 @@ const Join = () => {
         </Heading>
         <Input
           height={12}
-          autoCapitalize='none'
+          autoCapitalize="none"
           onChangeText={text => setFormValues({...formValues, email: text})}
           value={formValues.email}
         />
@@ -106,7 +106,7 @@ const Join = () => {
           onChangeText={text =>
             setFormValues({...formValues, recommendId: text})
           }
-          autoCapitalize='none'
+          autoCapitalize="none"
           value={formValues.recommendId}
         />
       </View>

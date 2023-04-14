@@ -1,14 +1,14 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
-import  Login from '../screens/Login';
+import  Mypage from '../screens/Mypage';
 
 const Stack = createStackNavigator();
 
-export default function LoginNavigator() {
+export default function MyPageNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Login">
-      <Stack.Screen name="Login" component={Login} />
+      initialRouteName="Mypage">
+      <Stack.Screen name="Mypage" component={Mypage} />
     </Stack.Navigator>
   );
 }

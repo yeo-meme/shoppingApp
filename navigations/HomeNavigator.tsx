@@ -1,5 +1,5 @@
-import React from 'react';
-import {DrawerActions, useNavigation} from '@react-navigation/native';
+import React,{useEffect} from 'react';
+import {DrawerActions, useNavigation, useRoute} from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
@@ -35,6 +35,8 @@ const isAuthenticated: boolean = true;
 function HomeTabs() {
   const isFocused = useIsFocused();
 
+  
+
   return (
     <Tab.Navigator initialRouteName="Home" screenOptions={{headerShown: false}}>
       {/* bottom navi */}
@@ -61,6 +63,7 @@ function HomeTabs() {
         component={Category}
         options={{
           tabBarLabel: '이벤트',
+          // tabBarVisible: getVisibility(route, 1),
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons name="history" color={color} size={size} />
           ),
@@ -83,7 +86,7 @@ function HomeTabs() {
       <Tab.Screen
         name="Account"
         component={Login}
-        options={{
+        options={({route}) => ({
           tabBarLabel: '마이페이지',
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
@@ -92,7 +95,7 @@ function HomeTabs() {
               size={size}
             />
           ),
-        }}
+        })}
       />
 
       {/* mypage */}
@@ -165,6 +168,7 @@ export default function HomeNavigator() {
       <Stack.Screen name="Detail" component={Detail} />
       <Stack.Screen name="Join" component={Join} />
       <Stack.Screen name="Mypage" component={Mypage} />
+      <Stack.Screen name="HomeTabs" component={HomeTabs} />
     </Stack.Navigator>
   );
 }
