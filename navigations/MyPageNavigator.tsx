@@ -4,10 +4,10 @@ import  Mypage from '../screens/Mypage';
 
 const Stack = createStackNavigator();
 
-export default function MyPageNavigator() {
+export default function MypageNavigator() {
   return (
     <Stack.Navigator
-      initialRouteName="Mypage">
+      initialRouteName="Mypage" screenOptions={{ headerShown:false}}>
       <Stack.Screen name="Mypage" component={Mypage} />
     </Stack.Navigator>
   );
